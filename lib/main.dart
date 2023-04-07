@@ -91,7 +91,8 @@ class _MyHomePageState extends State<MyHomePage> {
               style: Theme.of(context).textTheme.headlineMedium,
             ),
             Image.asset(AppAsset.profileImage),
-            const Icon(AppIcon.heart)
+            const Icon(AppIcon.heart,
+              color: LightThemeColor.accent)
           ],
         ),
       ),
