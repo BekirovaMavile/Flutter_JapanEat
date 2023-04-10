@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-// import 'package:flutter_japan_eat/ui_kit/app_assets.dart';
 import 'package:flutter_japan_eat/ui_kit/_ui_kit.dart';
+import 'package:flutter_japan_eat/ui/screens/food_list_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -12,10 +12,10 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: AppTheme.darkTheme,
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+    return const MaterialApp(
+      title: 'Japan Eat',
+      // theme: AppTheme.darkTheme,
+      home: FoodList(),
     );
   }
 }
