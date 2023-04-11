@@ -72,6 +72,7 @@ class _MyHomePageState extends State<MyHomePage> {
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
     return Scaffold(
+      // backgroundColor: Colors.black,
       appBar: AppBar(
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
@@ -90,8 +91,12 @@ class _MyHomePageState extends State<MyHomePage> {
               '$_counter',
               style: Theme.of(context).textTheme.headlineMedium,
             ),
-            Image.asset(AppAsset.profileImage),
-            const Icon(AppIcon.heart)
+            Image.asset(AppAsset.sushi1, scale: 10,),
+            Image.asset(AppAsset.profileImage, scale: 5,),
+            // const Icon(AppIcon.heart),
+            const Icon(AppIcon.outlinedHeart, color: Colors.black,),
+            // const Icon(AppIcon.outlinedHeart, fill: 1.0, color: Colors.green, size: 50,),
+            // IconButton(onPressed: () {}, icon: Icon(AppIcon.outlinedHeart), color: Colors.red,)
           ],
         ),
       ),

@@ -17,4 +17,3 @@ class AppIcon {
     fontPackage: _kFontPkg,
   );
 }
-
