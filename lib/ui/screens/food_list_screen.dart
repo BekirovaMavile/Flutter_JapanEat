@@ -29,6 +29,7 @@ class FoodListState extends State<FoodList> {
               "What do you want to eat \ntoday",
               style: Theme.of(context).textTheme.displayLarge,
             ),
+            _searchBar(),
             Text(
               "Available for you",
               style: Theme.of(context).textTheme.displaySmall,
@@ -94,5 +95,16 @@ PreferredSizeWidget _appBar(BuildContext context){
         ),
       )
     ],
+  );
+}
+Widget _searchBar() {
+  return const Padding(
+    padding: EdgeInsets.symmetric(vertical: 20, horizontal: 10),
+    child: TextField(
+      decoration: InputDecoration(
+        hintText: 'Search food',
+        prefixIcon: Icon(Icons.search, color: Colors.grey),
+      ),
+    ),
   );
 }
