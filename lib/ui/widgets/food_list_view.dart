@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_japan_eat/ui_kit/app_color.dart';
 
 import '../../data/models/food.dart';
 
@@ -14,6 +15,7 @@ class FoodListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
     return SizedBox(
       height: 200,
       child: ListView.separated(
@@ -22,9 +24,10 @@ class FoodListView extends StatelessWidget {
           itemBuilder: (_, index) {
             return Container(
               width: 160,
-              decoration: const BoxDecoration(
-                color: Colors.orange,
-                borderRadius: BorderRadius.all(Radius.circular(20)),
+              decoration: BoxDecoration(
+                color: isDark ?
+                DarkThemeColor.primaryLight : Colors.white,
+                borderRadius: const BorderRadius.all(Radius.circular(20)),
               ),
             );
           },
