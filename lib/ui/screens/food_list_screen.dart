@@ -64,7 +64,7 @@ class FoodListState extends State<FoodList> {
                   ],
                 ),
               ),
-              FoodListView(foods: AppData.foodItems),
+              FoodListView(foods: AppData.foodItems, isReversed: true),
             ],
           ),
         ),
