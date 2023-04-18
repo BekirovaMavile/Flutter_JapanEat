@@ -1,6 +1,7 @@
 import 'package:badges/badges.dart';
 import 'package:flutter/material.dart' hide Badge;
 import 'package:flutter_japan_eat/ui/extension/app_extension.dart';
+import 'package:flutter_japan_eat/ui/widgets/food_list_view.dart';
 // ignore: depend_on_referenced_packages
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../../ui_kit/_ui_kit.dart';
@@ -40,6 +41,7 @@ class FoodListState extends State<FoodList> {
                 style: Theme.of(context).textTheme.displaySmall,
               ),
               _categories(),
+              FoodListView(foods: AppData.foodItems),
               Padding(
                 padding: const EdgeInsets.only(top: 25, bottom: 5),
                 child: Row(
@@ -62,6 +64,7 @@ class FoodListState extends State<FoodList> {
                   ],
                 ),
               ),
+              FoodListView(foods: AppData.foodItems),
             ],
           ),
         ),
