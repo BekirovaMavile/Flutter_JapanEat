@@ -1,5 +1,6 @@
 import 'package:badges/badges.dart';
 import 'package:flutter/material.dart' hide Badge;
+import 'package:flutter_japan_eat/ui/extension/app_extension.dart';
 // ignore: depend_on_referenced_packages
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../../ui_kit/_ui_kit.dart';
@@ -135,7 +136,7 @@ class FoodListState extends State<FoodList> {
                     ),
                   ),
                   child: Text(
-                    category.type.name,
+                    category.type.name.toCapital,
                     style: Theme.of(context).textTheme.headlineMedium,
                   ),
                 ),
