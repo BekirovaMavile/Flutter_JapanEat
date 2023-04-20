@@ -25,7 +25,7 @@ class AppTheme {
     ),
     hintColor: Colors.black45,
     inputDecorationTheme: const InputDecorationTheme(
-      border: OutlineInputBorder(borderSide: BorderSide.none),
+      // border: OutlineInputBorder(borderSide: BorderSide.none),
       enabledBorder: OutlineInputBorder(
         borderRadius: BorderRadius.all(Radius.circular(25)),
         borderSide: BorderSide(color: Colors.transparent),
