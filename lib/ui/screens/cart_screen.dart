@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_japan_eat/ui/widgets/empty_wrapper.dart';
 class CartScreen extends StatefulWidget {
   const CartScreen({super.key});
 
@@ -11,6 +12,11 @@ class _CartScreenState extends State<CartScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: _appBar(context),
+      body: EmptyWrapper(
+        title: "Empty cart",
+        isEmpty: true,
+        child: Container(),
+      ),
     );
   }
 }
