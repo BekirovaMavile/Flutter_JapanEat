@@ -185,4 +185,42 @@ class AppData {
     FoodCategory(FoodType.ramen, false),
     FoodCategory(FoodType.burger, false),
   ];
+
+
+  static List<Food> cartItems = [
+    Food(
+      AppAsset.sushi10,
+      "Sushi10",
+      15.0,
+      2,
+      false,
+      dummyText,
+      3.5,
+      FoodType.ramen,
+      420,
+    ),
+    Food(
+      AppAsset.sushi11,
+      "Sushi11",
+      25.0,
+      4,
+      false,
+      dummyText,
+      3.0,
+      FoodType.tempura,
+      263,
+    ),
+    Food(
+      AppAsset.sushi12,
+      "Sushi12",
+      20.0,
+      5,
+      false,
+      dummyText,
+      5.0,
+      FoodType.tempura,
+      560,
+    ),
+  ];
 }
+
