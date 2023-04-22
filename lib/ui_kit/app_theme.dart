@@ -5,6 +5,14 @@ class AppTheme {
   const AppTheme._();
 
   static ThemeData lightTheme = ThemeData(
+    elevatedButtonTheme: ElevatedButtonThemeData(
+      style: ButtonStyle(
+        backgroundColor:
+        MaterialStateProperty.all<Color>(
+          LightThemeColor.accent,
+        ),
+      ),
+    ),
     brightness: Brightness.light,
     scaffoldBackgroundColor: LightThemeColor.primaryLight,
     appBarTheme: AppBarTheme(
@@ -41,6 +49,14 @@ class AppTheme {
   );
 
   static ThemeData darkTheme = ThemeData(
+    elevatedButtonTheme: ElevatedButtonThemeData(
+      style: ButtonStyle(
+        backgroundColor:
+        MaterialStateProperty.all<Color>(
+          LightThemeColor.accent,
+        ),
+      ),
+    ),
     brightness: Brightness.dark,
     scaffoldBackgroundColor: DarkThemeColor.primaryDark,
     appBarTheme: AppBarTheme(
