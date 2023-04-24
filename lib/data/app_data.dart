@@ -222,5 +222,55 @@ class AppData {
       560,
     ),
   ];
+
+
+  static List<Food> favoriteItems = [
+    Food(
+      AppAsset.sushi5,
+      "Sushi5",
+      10.0,
+      1,
+      true,
+      dummyText,
+      4.5,
+      FoodType.kebab,
+      650,
+    ),
+    Food(
+      AppAsset.sushi6,
+      "Sushi6",
+      20.0,
+      1,
+      true,
+      dummyText,
+      1.5,
+      FoodType.burger,
+      350,
+    ),
+    Food(
+      AppAsset.sushi7,
+      "Sushi7",
+      12.0,
+      1,
+      true,
+      dummyText,
+      3.5,
+      FoodType.burger,
+      265,
+    ),
+    Food(
+      AppAsset.sushi8,
+      "Sushi8",
+      30.0,
+      1,
+      true,
+      dummyText,
+      4.0,
+      FoodType.ramen,
+      890,
+    ),
+  ];
 }
+
+
 

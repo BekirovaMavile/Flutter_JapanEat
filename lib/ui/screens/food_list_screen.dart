@@ -158,7 +158,10 @@ class FoodListState extends State<FoodList> {
     // AppData.categories.asMap().forEach((index, category) {
     //   category.isSelected = index == selectedIndex;
     // });
-    AppData.categories[selectedIndex].isSelected = true;
+    for (int i = 0; i < AppData.categories.length; i++) {
+      AppData.categories[i].isSelected = i == selectedIndex;
+    }
+    // AppData.categories[selectedIndex].isSelected = true;
     setState(() {});
   }
 }
