@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_japan_eat/ui_kit/app_color.dart';
 import '../../ui_kit/app_text_style.dart';
 import '../../data/models/food.dart';
+import '../screens/food_detail_screen.dart';
 
 class FoodListView extends StatelessWidget {
   const FoodListView({
@@ -26,7 +27,12 @@ class FoodListView extends StatelessWidget {
             return GestureDetector(
                 onTap: (){
                   print('Клик на карточку');
-                },
+                  Navigator.of(context).push(
+                      MaterialPageRoute(
+                          builder: (_) => const FoodDetail()
+                      )
+                  );
+                      },
             child: Container(
               width: 160,
               decoration: BoxDecoration(

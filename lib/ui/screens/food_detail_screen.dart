@@ -28,10 +28,10 @@ class FoodDetailState extends State<FoodDetail> {
 
   PreferredSizeWidget _appBar(BuildContext context) {
     return AppBar(
-      leading: IconButton(
-        onPressed: () {},
-        icon: const Icon(Icons.arrow_back),
-      ),
+      // leading: IconButton(
+      //   onPressed: () {},
+      //   icon: const Icon(Icons.arrow_back),
+      // ),
       title: Text(
         'Food Detail Screen',
         style: TextStyle(
