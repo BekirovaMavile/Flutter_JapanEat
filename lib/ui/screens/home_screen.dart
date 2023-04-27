@@ -23,9 +23,10 @@ class HomeScreenState extends State<HomeScreen> {
           children: screens,
         ),
       ),
+
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: currentIndex,
-        onTap: (index) {},
+        onTap: onTabTap,
         selectedFontSize: 0,
         items: AppData.bottomNavigationItems.map(
               (element) {
@@ -42,5 +43,9 @@ class HomeScreenState extends State<HomeScreen> {
 
   final List<Widget> screens = [const FoodList(), const CartScreen(), const FavoriteScreen(), const ProfileScreen()];
   int currentIndex = 0;
-
+  void onTabTap(int index) {
+    if (currentIndex == index) return;
+    currentIndex = index;
+    setState(() {});
+  }
 }
