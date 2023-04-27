@@ -42,10 +42,12 @@ class HomeScreenState extends State<HomeScreen> {
   }
 
   final List<Widget> screens = [const FoodList(), const CartScreen(), const FavoriteScreen(), const ProfileScreen()];
-  int currentIndex = 0;
-  void onTabTap(int index) {
-    if (currentIndex == index) return;
-    currentIndex = index;
+  int get currentIndex => FoodState().currentIndex;
+
+  void onTabTap(int index) async {
+    await FoodState().onTabTap(index);
     setState(() {});
   }
+
+
 }
