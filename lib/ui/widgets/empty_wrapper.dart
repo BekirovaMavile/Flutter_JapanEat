@@ -19,7 +19,8 @@ class EmptyWrapper extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
+    return isEmpty?
+    Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -33,6 +34,6 @@ class EmptyWrapper extends StatelessWidget {
               .displayMedium)
         ],
       ),
-    );
+    ) : child;
   }
 }

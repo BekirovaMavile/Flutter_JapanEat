@@ -18,9 +18,13 @@ class CartScreenState extends State<CartScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: _appBar(context),
-      body:  _cartListView(),
-
-      bottomNavigationBar: _bottomAppBar(),
+      // body:  _cartListView(),
+      body: EmptyWrapper(
+        title: "Empty cart",
+        isEmpty: cartFood.isEmpty,
+        child: _cartListView(),
+      ),
+      bottomNavigationBar: cartFood.isEmpty? const SizedBox() : _bottomAppBar(),
     );
   }
   PreferredSizeWidget _appBar(BuildContext context) {
