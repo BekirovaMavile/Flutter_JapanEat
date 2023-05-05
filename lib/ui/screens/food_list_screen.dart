@@ -1,13 +1,13 @@
 import 'package:badges/badges.dart';
 import 'package:flutter/material.dart' hide Badge;
-import 'package:flutter_japan_eat/ui/extension/app_extension.dart';
-import 'package:flutter_japan_eat/ui/widgets/food_list_view.dart';
+// ignore: depend_on_referenced_packages
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import '../../ui_kit/_ui_kit.dart';
-import '../../data/app_data.dart';
 import '../../data/models/food_category.dart';
 import '../../states/food_state.dart';
-// import 'package:flutter_project/data/app_data.dart';
+import '../../ui_kit/_ui_kit.dart';
+import '../../data/app_data.dart';
+import '../extension/app_extension.dart';
+import '../widgets/food_list_view.dart';
 
 class FoodList extends StatefulWidget {
   const FoodList({super.key});
@@ -18,6 +18,8 @@ class FoodList extends StatefulWidget {
 
 class FoodListState extends State<FoodList> {
   List<FoodCategory> get categories => FoodState().categories;
+  List<int> get foodIdsByCategory => FoodState().foodIdsByCategory;
+  List<int> get foodIds => FoodState().foodIds;
 
   @override
   Widget build(BuildContext context) => Scaffold(
@@ -42,7 +44,7 @@ class FoodListState extends State<FoodList> {
                 style: Theme.of(context).textTheme.displaySmall,
               ),
               _categories(),
-              FoodListView(foods: AppData.foodItems),
+              FoodListView(foodIds: foodIdsByCategory),
               Padding(
                 padding: const EdgeInsets.only(top: 25, bottom: 5),
                 child: Row(
@@ -65,7 +67,7 @@ class FoodListState extends State<FoodList> {
                   ],
                 ),
               ),
-              FoodListView(foods: AppData.foodItems, isReversed: true),
+              FoodListView(foodIds: foodIds, isReversed: true),
             ],
           ),
         ),
