@@ -45,7 +45,9 @@ class HomeScreenState extends State<HomeScreen> {
   int get currentIndex => FoodState().currentIndex;
 
   void onTabTap(int index) async {
-    await FoodState().onCategoryTap(index);
+    // print(index);
+    await FoodState().onTabTap(index);
+    // print(FoodState().currentIndex);
     setState(() {});
   }
 
