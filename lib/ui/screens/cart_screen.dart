@@ -47,8 +47,9 @@ class CartScreenState extends State<CartScreen> {
   Widget _cartListView() {
     return ListView.separated(
       padding: const EdgeInsets.all(30),
-      itemCount: cartFood.length,
+      itemCount: cartIds.length,
       itemBuilder: (_, index) {
+        final food = FoodState().foodById(cartIds[index]);
         return Container(
           width: double.infinity,
           padding: const EdgeInsets.all(5),
@@ -60,18 +61,19 @@ class CartScreenState extends State<CartScreen> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               const SizedBox(width: 20),
-              Image.asset(cartFood[index].image, scale: 10),
+              Image.asset(food.image,
+                  scale: 10),
               const SizedBox(width: 20),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    cartFood[index].name,
+                    food.name,
                     style: Theme.of(context).textTheme.displayMedium,
                   ),
                   const SizedBox(height: 5),
                   Text(
-                    "\$${cartFood[index].price}",
+                    "\$${food.price}",
                     style: Theme.of(context).textTheme.headlineSmall,
                   ),
                 ],
@@ -91,15 +93,15 @@ class CartScreenState extends State<CartScreen> {
                     size: const Size(24, 24),
                     padding: 0,
                     label: Text(
-                      cartFood[index].quantity.toString(),
+                      food.quantity.toString(),
                       style: Theme.of(context).textTheme.displayMedium,
                     ),
                   ),
                   Text(
-                    "\$10",
-                    style: AppTextStyle.h2Style.copyWith(color:
-                    LightThemeColor.accent),
+                    "\$${FoodState().calculatePricePerEachItem(food)}",
+                    style: AppTextStyle.h2Style.copyWith(color: LightThemeColor.accent),
                   )
+
                 ],
               )
             ],
