@@ -8,6 +8,7 @@ class FoodState {
   factory FoodState() => _instance;
   int _currentIndex = 0; //Индекс табнавигации.
   int get currentIndex => _currentIndex;
+  int selectedFoodId = 0;
 
   final List<FoodCategory> _categories = AppData.categories;
   List<FoodCategory> get categories => _categories;
@@ -37,6 +38,11 @@ class FoodState {
     if (_currentIndex == index) return;
     _currentIndex = index;
   }
+
+  Future<void> onFoodTap(int id) async {
+    selectedFoodId = id;
+  }
+
 
   Map<int, Food> foods =
   Map.fromEntries(AppData.foodItems.map((food) => MapEntry(food.id, food)));
