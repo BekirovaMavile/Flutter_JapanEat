@@ -47,10 +47,20 @@ class FoodState {
     if (!cartIds.contains(id)) cartIds.add(id);
     foods[id]?.quantity = amount;
   }
+
   String calculatePricePerEachItem(Food food) {
     double price = 0;
     price = food.quantity * food.price;
     return price.toString();
+  }
+
+  double calculateSubtotalPrice() {
+    double subtotal = 0;
+    for (var id in cartIds) {
+      final food = foodById(id);
+      subtotal += food.quantity * food.price;
+    }
+    return subtotal;
   }
 
 

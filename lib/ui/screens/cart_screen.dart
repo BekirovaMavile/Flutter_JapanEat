@@ -16,6 +16,7 @@ class CartScreen extends StatefulWidget {
 class CartScreenState extends State<CartScreen> {
   List<int> get cartIds => FoodState().cartIds;
   final cartFood = AppData.cartItems;
+  double get subtotal => FoodState().calculateSubtotalPrice();
 
   @override
   Widget build(BuildContext context) {
@@ -143,7 +144,7 @@ class CartScreenState extends State<CartScreen> {
                                 Theme.of(context).textTheme.headlineSmall,
                               ),
                               Text(
-                                "\$111",
+                                "\$${subtotal.toString()}",
                                 style:
                                 Theme.of(context).textTheme.displayMedium,
                               ),
@@ -188,9 +189,10 @@ class CartScreenState extends State<CartScreen> {
                                 Theme.of(context).textTheme.displayMedium,
                               ),
                               Text(
-                                "\$120.0",
+                                "\$${(subtotal + 5.0).toString()}",
                                 style:
-                                AppTextStyle.h2Style.copyWith(color: LightThemeColor.accent,),
+                                AppTextStyle.h2Style.copyWith(
+                                  color: LightThemeColor.accent,),
                               ),
                             ],
                           ),
