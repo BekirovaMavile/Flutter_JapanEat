@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'profile_screen.dart';
-import '../../states/food_state.dart';
+import '../../ui/screens/profile_screen.dart';
+
 import '../../data/app_data.dart';
+import '../../states/food_state.dart';
 import 'cart_screen.dart';
 import 'favorite_screen.dart';
 import 'food_list_screen.dart';
@@ -14,6 +15,16 @@ class HomeScreen extends StatefulWidget {
 }
 
 class HomeScreenState extends State<HomeScreen> {
+  final GlobalKey<CartScreenState> _cartKey = GlobalKey();
+  late final List<Widget> screens = [
+    const FoodList(),
+    CartScreen(
+      key: _cartKey,
+    ),
+    const FavoriteScreen(),
+    const ProfileScreen()
+  ];
+  int get currentIndex => FoodState().currentIndex;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,7 +34,6 @@ class HomeScreenState extends State<HomeScreen> {
           children: screens,
         ),
       ),
-
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: currentIndex,
         onTap: onTabTap,
@@ -41,13 +51,9 @@ class HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  final List<Widget> screens = [const FoodList(), const CartScreen(), const FavoriteScreen(), const ProfileScreen()];
-  int get currentIndex => FoodState().currentIndex;
-
   void onTabTap(int index) async {
     await FoodState().onTabTap(index);
     setState(() {});
+    if (index == 1) _cartKey.currentState?.update();
   }
-
-
 }

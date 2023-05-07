@@ -29,6 +29,9 @@ class FoodDetailState extends State<FoodDetail> {
     _amount--;
     setState(() {});
   }
+  void onAddToCart() async {
+    await FoodState().onAddToCartTap(foodId, _amount);
+  }
 
   // final food = AppData.food;
   @override
@@ -158,7 +161,7 @@ class FoodDetailState extends State<FoodDetail> {
                             child: Padding(
                               padding: const EdgeInsets.symmetric(horizontal: 30),
                               child: ElevatedButton(
-                                onPressed: (){},
+                                onPressed: onAddToCart ,
                                 child: const Text("Add to cart"),
                               ),
                             ),

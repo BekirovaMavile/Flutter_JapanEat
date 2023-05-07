@@ -43,6 +43,12 @@ class FoodState {
     selectedFoodId = id;
   }
 
+  Future<void> onAddToCartTap(int id, int amount) async {
+    if (!cartIds.contains(id)) cartIds.add(id);
+    foods[id]?.quantity = amount;
+  }
+
+
 
   Map<int, Food> foods =
   Map.fromEntries(AppData.foodItems.map((food) => MapEntry(food.id, food)));

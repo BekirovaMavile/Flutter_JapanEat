@@ -30,6 +30,11 @@ class CartScreenState extends State<CartScreen> {
     );
   }
 
+  void update() {
+    setState(() {});
+  }
+
+
   PreferredSizeWidget _appBar(BuildContext context) {
     return AppBar(
       title: Text(
