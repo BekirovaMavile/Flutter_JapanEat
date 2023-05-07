@@ -4,6 +4,7 @@ import '../../data/app_data.dart';
 import '../../ui_kit/app_color.dart';
 import '../../ui_kit/app_text_style.dart';
 import '../widgets/counter_button.dart';
+import '../../states/food_state.dart';
 
 class CartScreen extends StatefulWidget {
   const CartScreen({super.key});
@@ -13,20 +14,22 @@ class CartScreen extends StatefulWidget {
 }
 
 class CartScreenState extends State<CartScreen> {
-  var cartFood = AppData.cartItems;
+  List<int> get cartIds => FoodState().cartIds;
+  final cartFood = AppData.cartItems;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: _appBar(context),
-      // body:  _cartListView(),
       body: EmptyWrapper(
         title: "Empty cart",
-        isEmpty: cartFood.isEmpty,
+        isEmpty: cartIds.isEmpty,
         child: _cartListView(),
       ),
-      bottomNavigationBar: cartFood.isEmpty? const SizedBox() : _bottomAppBar(),
+      bottomNavigationBar: cartIds.isEmpty ? const SizedBox() : _bottomAppBar(),
     );
   }
+
   PreferredSizeWidget _appBar(BuildContext context) {
     return AppBar(
       title: Text(

@@ -9,7 +9,7 @@ class FoodState {
   int _currentIndex = 0; //Индекс табнавигации.
   int get currentIndex => _currentIndex;
   int selectedFoodId = 0;
-
+  List<int> cartIds = [];
   final List<FoodCategory> _categories = AppData.categories;
   List<FoodCategory> get categories => _categories;
 
