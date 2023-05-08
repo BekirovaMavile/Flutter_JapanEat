@@ -71,6 +71,18 @@ class FoodState {
     if (food.quantity == 1) return;
     food.quantity = food.quantity - 1;
   }
+  Future<void> onDeleteFoodFromCartById(int id) async {
+    cartIds.remove(id);
+    final food = foodById(id);
+    food.quantity = 1;
+  }
+  Future<void> onCleanCart() async {
+    for (var id in cartIds) {
+      final food = foodById(id);
+      food.quantity = 1;
+    }
+    cartIds = [];
+  }
 
 
 
