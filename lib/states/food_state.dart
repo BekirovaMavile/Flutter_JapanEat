@@ -85,13 +85,13 @@ class FoodState {
   }
 
 
-
-
   Map<int, Food> foods =
   Map.fromEntries(AppData.foodItems.map((food) => MapEntry(food.id, food)));
   List<int> foodIds = AppData.foodItems.expand((food) => [food.id]).toList();
   List<int> foodIdsByCategory =
   AppData.foodItems.expand((food) => [food.id]).toList();
+  List<int> favoriteIds = [];
+
 
   Food foodById(int id) {
     return foods[id] ?? AppData.foodItems[0];

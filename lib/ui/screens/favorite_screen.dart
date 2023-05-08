@@ -5,6 +5,7 @@ import '../../data/models/food.dart';
 import '../../ui_kit/app_color.dart';
 import '../../ui_kit/app_icon.dart';
 import '../widgets/empty_wrapper.dart';
+import '../../states/food_state.dart';
 
 class FavoriteScreen extends StatefulWidget {
   const FavoriteScreen({super.key});
@@ -14,6 +15,7 @@ class FavoriteScreen extends StatefulWidget {
 }
 
 class FavoriteScreenState extends State<FavoriteScreen> {
+  List<int> get favoriteIds => FoodState().favoriteIds;
   var favoriteFood = AppData.favoriteItems;
   @override
   Widget build(BuildContext context) {
