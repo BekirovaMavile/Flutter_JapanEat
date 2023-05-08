@@ -18,8 +18,8 @@ class FoodDetail extends StatefulWidget {
 class FoodDetailState extends State<FoodDetail> {
   int get foodId => FoodState().selectedFoodId;
   Food get food => FoodState().foodById(foodId);
-
   late int _amount = food.quantity;
+
   void onIncrementTap() {
     _amount++;
     setState(() {});
@@ -32,6 +32,11 @@ class FoodDetailState extends State<FoodDetail> {
   void onAddToCart() async {
     await FoodState().onAddToCartTap(foodId, _amount);
   }
+  void onAddDeleteFavorite() async {
+    await FoodState().onAddDeleteFavoriteTap(foodId);
+    setState(() {});
+  }
+
 
   // final food = AppData.food;
   @override
@@ -67,12 +72,13 @@ class FoodDetailState extends State<FoodDetail> {
     return FloatingActionButton(
       elevation: 0.0,
       backgroundColor: LightThemeColor.accent,
-      onPressed: () {},
+      onPressed: onAddDeleteFavorite,
       child: food.isFavorite
           ? const Icon(AppIcon.heart)
           : const Icon(AppIcon.outlinedHeart),
     );
   }
+
 
   Widget _bottomAppBar() {
     return ClipRRect(
@@ -172,7 +178,4 @@ class FoodDetailState extends State<FoodDetail> {
                   ),
                 ))));
   }
-
-
-
 }

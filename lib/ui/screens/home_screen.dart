@@ -16,12 +16,15 @@ class HomeScreen extends StatefulWidget {
 
 class HomeScreenState extends State<HomeScreen> {
   final GlobalKey<CartScreenState> _cartKey = GlobalKey();
+  GlobalKey<FavoriteScreenState> _favoriteKey = GlobalKey();
   late final List<Widget> screens = [
     const FoodList(),
     CartScreen(
       key: _cartKey,
     ),
-    const FavoriteScreen(),
+    FavoriteScreen(
+        key: _favoriteKey
+    ),
     const ProfileScreen()
   ];
   int get currentIndex => FoodState().currentIndex;
@@ -55,5 +58,6 @@ class HomeScreenState extends State<HomeScreen> {
     await FoodState().onTabTap(index);
     setState(() {});
     if (index == 1) _cartKey.currentState?.update();
+    if (index == 2) _favoriteKey.currentState?.update();
   }
 }

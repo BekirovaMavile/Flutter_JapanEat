@@ -30,6 +30,9 @@ class FavoriteScreenState extends State<FavoriteScreen> {
       ),
     );
   }
+  void update() {
+    setState(() {});
+  }
   PreferredSizeWidget _appBar(BuildContext context) {
     return AppBar(
       title: Text(

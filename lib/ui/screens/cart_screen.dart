@@ -31,7 +31,6 @@ class CartScreenState extends State<CartScreen> {
       bottomNavigationBar: cartIds.isEmpty ? const SizedBox() : _bottomAppBar(),
     );
   }
-
   void update() {
     setState(() {});
   }
