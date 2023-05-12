@@ -1,5 +1,6 @@
 import 'package:badges/badges.dart';
 import 'package:flutter/material.dart' hide Badge;
+import 'package:flutter_japan_eat/states/food_state.dart';
 import 'package:flutter_japan_eat/ui/extension/app_extension.dart';
 import 'package:flutter_japan_eat/ui/widgets/food_list_view.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -152,15 +153,16 @@ class FoodListState extends State<FoodList> {
     );
   }
 
-  void onCategoryTap(int selectedIndex) {
+  void onCategoryTap(int selectedIndex) async {
     //Меняем выбранную категорию
     // AppData.categories.asMap().forEach((index, category) {
     //   category.isSelected = index == selectedIndex;
     // });
-    for (int index = 0; index < AppData.categories.length; index++) {
-      AppData.categories[index].isSelected = index == selectedIndex;
-    }
+    // for (int index = 0; index < AppData.categories.length; index++) {
+    //   AppData.categories[index].isSelected = index == selectedIndex;
+    // }
     // AppData.categories[selectedIndex].isSelected = true;
+    await FoodState().categoryTab(selectedIndex);
     setState(() {});
   }
 }
