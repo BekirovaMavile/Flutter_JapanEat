@@ -1,5 +1,6 @@
 import 'package:badges/badges.dart';
 import 'package:flutter/material.dart' hide Badge;
+import 'package:flutter_japan_eat/data/models/food.dart';
 import 'package:flutter_japan_eat/states/food_state.dart';
 import 'package:flutter_japan_eat/ui/extension/app_extension.dart';
 import 'package:flutter_japan_eat/ui/widgets/food_list_view.dart';
@@ -17,6 +18,8 @@ class FoodList extends StatefulWidget {
 
 class FoodListState extends State<FoodList> {
   var categories = AppData.categories;
+  List<FoodType> get foodTypeByCategory => FoodState().foodTypeByCategory;
+  List<FoodType> get foodType => FoodState().foodType;
 
   @override
   Widget build(BuildContext context) => Scaffold(
@@ -41,7 +44,10 @@ class FoodListState extends State<FoodList> {
                 style: Theme.of(context).textTheme.displaySmall,
               ),
               _categories(),
-              FoodListView(foods: AppData.foodItems),
+              FoodListView(
+                  // foods: AppData.foodItems,
+                foodType: foodTypeByCategory,
+              ),
               Padding(
                 padding: const EdgeInsets.only(top: 25, bottom: 5),
                 child: Row(
@@ -64,7 +70,10 @@ class FoodListState extends State<FoodList> {
                   ],
                 ),
               ),
-              FoodListView(foods: AppData.foodItems, isReversed: true),
+              FoodListView(
+                  // foods: AppData.foodItems,
+                  foodType: foodType,
+                  isReversed: true),
             ],
           ),
         ),

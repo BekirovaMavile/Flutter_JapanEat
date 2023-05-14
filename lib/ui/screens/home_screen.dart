@@ -16,6 +16,18 @@ class HomeScreen extends StatefulWidget {
 
 class HomeScreenState extends State<HomeScreen> {
   @override
+  void initState() {
+    for(final element in FoodState().foods.entries){
+      print(element.key);     // получаем ключ элемента
+      print(element.value.name);
+      print("-----------");
+      // получаем значение элемента
+    }
+    print(FoodState().foods);
+    // TODO: implement initState
+    super.initState();
+  }
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
