@@ -20,6 +20,15 @@ class FoodListState extends State<FoodList> {
   var categories = AppData.categories;
   List<FoodType> get foodTypeByCategory => FoodState().foodTypeByCategory;
   List<FoodType> get foodType => FoodState().foodType;
+  // Future<void> get init => FoodState().init();
+  Map<FoodType, List<Food>> get foodsByType => FoodState().foodsByType;
+  FoodType? selectedCategory;
+
+  void isSelected(FoodType category) {
+    setState(() {
+      selectedCategory = category;
+    });
+  }
 
   @override
   Widget build(BuildContext context) => Scaffold(
@@ -46,7 +55,11 @@ class FoodListState extends State<FoodList> {
               _categories(),
               FoodListView(
                   // foods: AppData.foodItems,
-                foodType: foodTypeByCategory,
+                foods: selectedCategory != null
+                    ? foodsByType[selectedCategory] ?? []
+                    : AppData.foodItems,
+                  init: FoodState().init(),
+                // foodType: foodTypeByCategory,
               ),
               Padding(
                 padding: const EdgeInsets.only(top: 25, bottom: 5),
@@ -71,8 +84,9 @@ class FoodListState extends State<FoodList> {
                 ),
               ),
               FoodListView(
-                  // foods: AppData.foodItems,
-                  foodType: foodType,
+                  foods: AppData.foodItems,
+                  // foodType: foodType,
+                  init: FoodState().init(),
                   isReversed: true),
             ],
           ),
@@ -132,6 +146,7 @@ class FoodListState extends State<FoodList> {
             scrollDirection: Axis.horizontal,
             itemBuilder: (_, index) {
               final category = AppData.categories[index];
+              final isSelected = category.toString() == selectedCategory;
               return GestureDetector(
                 onTap: () {
                   onCategoryTap(index);

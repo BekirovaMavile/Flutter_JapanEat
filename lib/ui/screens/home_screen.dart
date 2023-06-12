@@ -15,19 +15,28 @@ class HomeScreen extends StatefulWidget {
 }
 
 class HomeScreenState extends State<HomeScreen> {
+  void initFoodState() async {
+    await FoodState().init();
+  }
   @override
   void initState() {
-    for(final element in FoodState().foods.entries){
-      print(element.key);     // получаем ключ элемента
-      print(element.value.name);
-      print("-----------");
-      // получаем значение элемента
-    }
-    print(FoodState().foods);
+    initFoodState();
+    // for(final element in FoodState().foodsByType.entries){
+    //   print(element.key);     // получаем ключ элемента
+    //   print(element.value);
+    //   print("-----------");
+    //   // получаем значение элемента
+    // }
+    // print(FoodState().foodsByType);
     // TODO: implement initState
     super.initState();
   }
-  @override
+  // @override
+  // void initStat() async {
+  //   await FoodState().init();
+  //   super.initState();
+  // }
+
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(

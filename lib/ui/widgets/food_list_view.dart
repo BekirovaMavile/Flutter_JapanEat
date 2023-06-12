@@ -8,13 +8,15 @@ import '../../states/food_state.dart';
 class FoodListView extends StatelessWidget {
   const FoodListView({
     super.key,
-    // required this.foods,
-    required this.foodType,
+    required this.foods,
+    // required this.foodsByType,
+    required this.init,
     this.isReversed = false
   });
 
-  // final List<Food> foods;
-  final List<FoodType> foodType;
+  final List<Food> foods;
+  // final Map<FoodType, List<Food>> foodsByType;
+  final Future<void> init;
   final bool isReversed;
 
   @override
@@ -26,10 +28,7 @@ class FoodListView extends StatelessWidget {
           scrollDirection: Axis.horizontal,
           padding: const EdgeInsets.only(top: 20),
           itemBuilder: (_, index) {
-            Food food = isReversed
-                ? FoodState().foodByType(foodType.reversed.
-            toList()[index])
-                : FoodState().foodByType(foodType[index]);
+            Food food = isReversed ? foods.reversed.toList()[index] : foods[index];
             return GestureDetector(
                 onTap: (){
                   print('Клик на карточку');
