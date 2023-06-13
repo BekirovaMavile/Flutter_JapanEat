@@ -16,7 +16,6 @@ class FoodList extends StatefulWidget {
   State<StatefulWidget> createState() => FoodListState();
 }
 
-
 class FoodListState extends State<FoodList> {
   List<FoodCategory> get categories => FoodState().categories;
   List<int> get foodIds => FoodState().foodIds;
@@ -167,17 +166,4 @@ class FoodListState extends State<FoodList> {
       ),
     );
   }
-
-  // void onCategoryTap(int selectedIndex) async {
-    //Меняем выбранную категорию
-    // AppData.categories.asMap().forEach((index, category) {
-    //   category.isSelected = index == selectedIndex;
-    // });
-    // for (int index = 0; index < AppData.categories.length; index++) {
-    //   AppData.categories[index].isSelected = index == selectedIndex;
-    // }
-    // AppData.categories[selectedIndex].isSelected = true;
-  //   await FoodState().categoryTab(selectedIndex);
-  //   setState(() {});
-  // }
 }
