@@ -15,6 +15,15 @@ class HomeScreen extends StatefulWidget {
 }
 
 class HomeScreenState extends State<HomeScreen> {
+  // int currentIndex = 0;
+  int get currentIndex => FoodState().tabIndex;
+
+  void onTabTap (int index) async {
+    await FoodState().onTabTap(index);
+    setState(() {
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,11 +53,11 @@ class HomeScreenState extends State<HomeScreen> {
 
   final List<Widget> screens = [const FoodList(), const CartScreen(), const FavoriteScreen(), const ProfileScreen()];
 
-  int get currentIndex => FoodState().tabIndex;
+  // int get currentIndex => FoodState().tabIndex;
   // int currentIndex = 0;
-  void onTabTap(int index) async {
-    await FoodState().tabTap(index);
-    // FoodState().tabIndex = 3;
-    setState(() {});
-  }
+  // void onTabTap(int index) async {
+  //   await FoodState().tabTap(index);
+  //   // FoodState().tabIndex = 3;
+  //   setState(() {});
+  // }
 }

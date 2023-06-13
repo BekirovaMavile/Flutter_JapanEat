@@ -1,6 +1,7 @@
 enum FoodType { all, sushi, kebab, tempura, ramen, burger }
 
 class Food {
+  int id;
   String image;
   String name;
   double price;
@@ -12,6 +13,7 @@ class Food {
   int voter;
 
   Food(
+      this.id,
       this.image,
       this.name,
       this.price,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_japan_eat/states/food_state.dart';
 import 'package:flutter_japan_eat/ui_kit/app_color.dart';
 import '../../ui_kit/app_text_style.dart';
 import '../../data/models/food.dart';
@@ -7,11 +8,11 @@ import '../screens/food_detail_screen.dart';
 class FoodListView extends StatelessWidget {
   const FoodListView({
     super.key,
-    required this.foods,
+    required this.foodIds,
     this.isReversed = false
   });
 
-  final List<Food> foods;
+  final List<int> foodIds;
   final bool isReversed;
 
   @override
@@ -23,7 +24,8 @@ class FoodListView extends StatelessWidget {
           scrollDirection: Axis.horizontal,
           padding: const EdgeInsets.only(top: 20),
           itemBuilder: (_, index) {
-            Food food = isReversed ? foods.reversed.toList()[index] : foods[index];
+            Food food = isReversed ? FoodState().foodById(foodIds.reversed.toList()[index]) : FoodState().foodById(foodIds[index]);
+            // Food food = isReversed ? foods.reversed.toList()[index] : foods[index];
             return GestureDetector(
                 onTap: (){
                   print('Клик на карточку');
@@ -65,7 +67,7 @@ class FoodListView extends StatelessWidget {
               width: 50,
             );
           },
-          itemCount: 20),
+          itemCount: foodIds.length),
     );
   }
 }

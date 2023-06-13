@@ -1,5 +1,6 @@
 import 'package:badges/badges.dart';
 import 'package:flutter/material.dart' hide Badge;
+import 'package:flutter_japan_eat/data/models/food_category.dart';
 import 'package:flutter_japan_eat/states/food_state.dart';
 import 'package:flutter_japan_eat/ui/extension/app_extension.dart';
 import 'package:flutter_japan_eat/ui/widgets/food_list_view.dart';
@@ -16,7 +17,15 @@ class FoodList extends StatefulWidget {
 }
 
 class FoodListState extends State<FoodList> {
-  var categories = AppData.categories;
+  List<FoodCategory> get categories => FoodState().categories;
+  List<int> get foodIds => FoodState().foodIds;
+  List<int> get foodIdsByCategory => FoodState().foodIdsByCategory;
+
+  void onCategoryTap(int index) async {
+    await FoodState().categoryTab(index);
+    setState(() {
+    });
+  }
 
   @override
   Widget build(BuildContext context) => Scaffold(
@@ -41,7 +50,9 @@ class FoodListState extends State<FoodList> {
                 style: Theme.of(context).textTheme.displaySmall,
               ),
               _categories(),
-              FoodListView(foods: AppData.foodItems),
+              FoodListView(
+                foodIds: foodIdsByCategory,
+              ),
               Padding(
                 padding: const EdgeInsets.only(top: 25, bottom: 5),
                 child: Row(
@@ -64,7 +75,10 @@ class FoodListState extends State<FoodList> {
                   ],
                 ),
               ),
-              FoodListView(foods: AppData.foodItems, isReversed: true),
+              FoodListView(
+                  foodIds: foodIds,
+                  isReversed: true
+              ),
             ],
           ),
         ),
@@ -153,7 +167,7 @@ class FoodListState extends State<FoodList> {
     );
   }
 
-  void onCategoryTap(int selectedIndex) async {
+  // void onCategoryTap(int selectedIndex) async {
     //Меняем выбранную категорию
     // AppData.categories.asMap().forEach((index, category) {
     //   category.isSelected = index == selectedIndex;
@@ -162,7 +176,7 @@ class FoodListState extends State<FoodList> {
     //   AppData.categories[index].isSelected = index == selectedIndex;
     // }
     // AppData.categories[selectedIndex].isSelected = true;
-    await FoodState().categoryTab(selectedIndex);
-    setState(() {});
-  }
+  //   await FoodState().categoryTab(selectedIndex);
+  //   setState(() {});
+  // }
 }
