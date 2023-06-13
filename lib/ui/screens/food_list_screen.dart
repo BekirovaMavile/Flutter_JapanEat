@@ -1,13 +1,11 @@
 import 'package:badges/badges.dart';
 import 'package:flutter/material.dart' hide Badge;
-import 'package:flutter_japan_eat/data/models/food_category.dart';
-import 'package:flutter_japan_eat/states/food_state.dart';
-import 'package:flutter_japan_eat/ui/extension/app_extension.dart';
-import 'package:flutter_japan_eat/ui/widgets/food_list_view.dart';
+// ignore: depend_on_referenced_packages
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../../ui_kit/_ui_kit.dart';
 import '../../data/app_data.dart';
-// import 'package:flutter_project/data/app_data.dart';
+import '../extension/app_extension.dart';
+import '../widgets/food_list_view.dart';
 
 class FoodList extends StatefulWidget {
   const FoodList({super.key});
@@ -17,72 +15,60 @@ class FoodList extends StatefulWidget {
 }
 
 class FoodListState extends State<FoodList> {
-  List<FoodCategory> get categories => FoodState().categories;
-  List<int> get foodIds => FoodState().foodIds;
-  List<int> get foodIdsByCategory => FoodState().foodIdsByCategory;
-
-  void onCategoryTap(int index) async {
-    await FoodState().categoryTab(index);
-    setState(() {
-    });
-  }
+  var categories = AppData.categories;
 
   @override
   Widget build(BuildContext context) => Scaffold(
-      appBar: _appBar(context),
-      body: Padding(
-        padding: const EdgeInsets.all(20),
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                "Morning, Mavile",
-                style: Theme.of(context).textTheme.headlineSmall,
-              ),
-              Text(
-                "What do you want to eat \ntoday",
-                style: Theme.of(context).textTheme.displayLarge,
-              ),
-              _searchBar(),
-              Text(
-                "Available for you",
-                style: Theme.of(context).textTheme.displaySmall,
-              ),
-              _categories(),
-              FoodListView(
-                foodIds: foodIdsByCategory,
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: 25, bottom: 5),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      "Best food of the week",
-                      style: Theme.of(context).textTheme.displaySmall,
+    appBar: _appBar(context),
+    body: Padding(
+      padding: const EdgeInsets.all(20),
+      child: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              "Morning, Yuken",
+              style: Theme.of(context).textTheme.headlineSmall,
+            ),
+            Text(
+              "What do you want to eat \ntoday",
+              style: Theme.of(context).textTheme.displayLarge,
+            ),
+            _searchBar(),
+            Text(
+              "Available for you",
+              style: Theme.of(context).textTheme.displaySmall,
+            ),
+            _categories(),
+            FoodListView(foods: AppData.foodItems),
+            Padding(
+              padding: const EdgeInsets.only(top: 25, bottom: 5),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    "Best food of the week",
+                    style: Theme.of(context).textTheme.displaySmall,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(right: 20),
+                    child: Text(
+                      "See all",
+                      style: Theme.of(context)
+                          .textTheme
+                          .headlineMedium
+                          ?.copyWith(color: LightThemeColor.accent),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.only(right: 20),
-                      child: Text(
-                        "See all",
-                        style: Theme.of(context)
-                            .textTheme
-                            .headlineMedium
-                            ?.copyWith(color: LightThemeColor.accent),
-                      ),
-                    ),
-                  ],
-                ),
+                  ),
+                ],
               ),
-              FoodListView(
-                  foodIds: foodIds,
-                  isReversed: true
-              ),
-            ],
-          ),
+            ),
+            FoodListView(foods: AppData.foodItems, isReversed: true),
+          ],
         ),
-      ));
+      ),
+    ),
+  );
   PreferredSizeWidget _appBar(BuildContext context) {
     return AppBar(
       leading: IconButton(
@@ -167,16 +153,11 @@ class FoodListState extends State<FoodList> {
     );
   }
 
-  // void onCategoryTap(int selectedIndex) async {
+  void onCategoryTap(int selectedIndex) {
     //Меняем выбранную категорию
-    // AppData.categories.asMap().forEach((index, category) {
-    //   category.isSelected = index == selectedIndex;
-    // });
-    // for (int index = 0; index < AppData.categories.length; index++) {
-    //   AppData.categories[index].isSelected = index == selectedIndex;
-    // }
-    // AppData.categories[selectedIndex].isSelected = true;
-  //   await FoodState().categoryTab(selectedIndex);
-  //   setState(() {});
-  // }
+    AppData.categories.asMap().forEach((index, category) {
+      category.isSelected = index == selectedIndex;
+    });
+    setState(() {});
+  }
 }

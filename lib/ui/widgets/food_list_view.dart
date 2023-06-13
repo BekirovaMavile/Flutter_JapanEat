@@ -1,22 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_japan_eat/states/food_state.dart';
-import 'package:flutter_japan_eat/ui_kit/app_color.dart';
-import '../../ui_kit/app_text_style.dart';
+import '../../ui_kit/app_color.dart';
 import '../../data/models/food.dart';
+import '../../ui_kit/app_text_style.dart';
 import '../screens/food_detail_screen.dart';
 
 class FoodListView extends StatelessWidget {
-  const FoodListView({
-    super.key,
-    required this.foodIds,
-    this.isReversed = false
-  });
+  const FoodListView({super.key, required this.foods, this.isReversed = false});
 
-  final List<int> foodIds;
+  final List<Food> foods;
   final bool isReversed;
 
   @override
   Widget build(BuildContext context) {
+    // ignore: unused_local_variable
     final isDark = Theme.of(context).brightness == Brightness.dark;
     return SizedBox(
       height: 200,
@@ -24,24 +20,25 @@ class FoodListView extends StatelessWidget {
           scrollDirection: Axis.horizontal,
           padding: const EdgeInsets.only(top: 20),
           itemBuilder: (_, index) {
-            Food food = isReversed ? FoodState().foodById(foodIds.reversed.toList()[index]) : FoodState().foodById(foodIds[index]);
-            // Food food = isReversed ? foods.reversed.toList()[index] : foods[index];
+            // ignore: unused_local_variable
+            Food food =
+            isReversed ? foods.reversed.toList()[index] : foods[index];
             return GestureDetector(
-                onTap: (){
-                  print('Клик на карточку');
-                  Navigator.of(context).push(
-                      MaterialPageRoute(
-                          builder: (_) => const FoodDetail()
-                      )
-                  );
-                      },
-            child: Container(
-              width: 160,
-              decoration: BoxDecoration(
-                color: isDark ?
-                DarkThemeColor.primaryLight : Colors.white,
-                borderRadius: const BorderRadius.all(Radius.circular(20)),
-              ),
+              onTap: () {
+                // ignore: avoid_print
+                print('Клик на карточку');
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                      builder: (_) => const FoodDetail()
+                  ),
+                );
+              },
+              child: Container(
+                width: 160,
+                decoration: BoxDecoration(
+                  color: isDark ? DarkThemeColor.primaryLight : Colors.white,
+                  borderRadius: const BorderRadius.all(Radius.circular(20)),
+                ),
                 child: Padding(
                   padding: const EdgeInsets.all(20),
                   child: Column(
@@ -50,16 +47,20 @@ class FoodListView extends StatelessWidget {
                       Image.asset(food.image, scale: 6),
                       Text(
                         "\$${food.price}",
-                        style: AppTextStyle.h3Style.copyWith(color: LightThemeColor.accent),
+                        style: AppTextStyle.h3Style
+                            .copyWith(color: LightThemeColor.accent),
                       ),
                       Text(
                         food.name,
-                        style: Theme.of(context).textTheme.headlineMedium?.copyWith(fontWeight: FontWeight.bold),
+                        style: Theme.of(context)
+                            .textTheme
+                            .headlineMedium
+                            ?.copyWith(fontWeight: FontWeight.bold),
                       ),
                     ],
                   ),
-                )
-            ),
+                ),
+              ),
             );
           },
           separatorBuilder: (_, __) {
@@ -67,7 +68,7 @@ class FoodListView extends StatelessWidget {
               width: 50,
             );
           },
-          itemCount: foodIds.length),
+          itemCount: 20),
     );
   }
 }

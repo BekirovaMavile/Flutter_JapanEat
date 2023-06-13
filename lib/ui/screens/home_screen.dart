@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_japan_eat/states/food_state.dart';
-import 'profile_screen.dart';
+import '../screens/profile_screen.dart';
 
 import '../../data/app_data.dart';
 import 'cart_screen.dart';
@@ -15,15 +14,6 @@ class HomeScreen extends StatefulWidget {
 }
 
 class HomeScreenState extends State<HomeScreen> {
-  // int currentIndex = 0;
-  int get currentIndex => FoodState().tabIndex;
-
-  void onTabTap (int index) async {
-    await FoodState().onTabTap(index);
-    setState(() {
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,31 +23,29 @@ class HomeScreenState extends State<HomeScreen> {
           children: screens,
         ),
       ),
-
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: currentIndex,
         onTap: onTabTap,
-        selectedFontSize: 0,
-        items: AppData.bottomNavigationItems.map(
-              (element) {
-            return BottomNavigationBarItem(
-              icon: element.disableIcon,
-              label: element.label,
-              activeIcon: element.enableIcon,
-            );
-          },
-        ).toList(),
+        selectedFontSize: 0,items: AppData.bottomNavigationItems.map(
+            (element) {
+          return BottomNavigationBarItem(
+            icon: element.disableIcon,
+            label: element.label,
+            activeIcon: element.enableIcon,
+          );
+        },
+      ).toList(),
       ),
     );
+
+  }
+  final List<Widget> screens = [const FoodList(), const CartScreen(), const FavoriteScreen(), const ProfileScreen()];
+  int currentIndex = 0;
+
+  void onTabTap(int index) {
+    if (currentIndex == index) return;
+    currentIndex = index;
+    setState(() {});
   }
 
-  final List<Widget> screens = [const FoodList(), const CartScreen(), const FavoriteScreen(), const ProfileScreen()];
-
-  // int get currentIndex => FoodState().tabIndex;
-  // int currentIndex = 0;
-  // void onTabTap(int index) async {
-  //   await FoodState().tabTap(index);
-  //   // FoodState().tabIndex = 3;
-  //   setState(() {});
-  // }
 }
