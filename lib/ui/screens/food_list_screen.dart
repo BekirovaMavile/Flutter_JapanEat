@@ -16,6 +16,7 @@ class FoodList extends StatefulWidget {
   State<StatefulWidget> createState() => FoodListState();
 }
 
+
 class FoodListState extends State<FoodList> {
   List<FoodCategory> get categories => FoodState().categories;
   List<int> get foodIds => FoodState().foodIds;
