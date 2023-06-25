@@ -20,12 +20,20 @@ class FoodListState extends State<FoodList> {
   List<FoodCategory> get categories => FoodState().categories;
   List<int> get foodIds => FoodState().foodIds;
   List<int> get foodIdsByCategory => FoodState().foodIdsByCategory;
+  // bool isDarkMode = false;
 
   void onCategoryTap(int index) async {
     await FoodState().categoryTab(index);
     setState(() {
     });
   }
+
+  // void toggleTheme() {
+  //   setState(() {
+  //     isDarkMode = !isDarkMode;
+  //     // if (AppTheme.lightTheme);
+  //   });
+  // }
 
   @override
   Widget build(BuildContext context) => Scaffold(
@@ -86,7 +94,7 @@ class FoodListState extends State<FoodList> {
   PreferredSizeWidget _appBar(BuildContext context) {
     return AppBar(
       leading: IconButton(
-        icon: const FaIcon(FontAwesomeIcons.dice),
+        icon: FaIcon(FontAwesomeIcons.dice),
         onPressed: () {},
       ),
       title: Row(

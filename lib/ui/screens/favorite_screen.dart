@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_japan_eat/states/food_state.dart';
 
 import '../../data/app_data.dart';
 import '../../data/models/food.dart';
@@ -15,6 +16,13 @@ class FavoriteScreen extends StatefulWidget {
 
 class FavoriteScreenState extends State<FavoriteScreen> {
   var favoriteFood = AppData.favoriteItems;
+  List<int> get favoriteIds => FoodState().favoriteIds;
+
+  void update(){
+    setState(() {
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,7 +31,7 @@ class FavoriteScreenState extends State<FavoriteScreen> {
       body: EmptyWrapper(
         type: EmptyWrapperType.favorite,
         title: 'Empty favorite',
-        isEmpty: favoriteFood.isEmpty,
+        isEmpty: favoriteIds.isEmpty,
         child: _favoriteListView(),
       ),
     );
@@ -40,9 +48,9 @@ class FavoriteScreenState extends State<FavoriteScreen> {
   Widget _favoriteListView() {
     return ListView.separated(
       padding: const EdgeInsets.all(30),
-      itemCount: favoriteFood.length,
+      itemCount: favoriteIds.length,
       itemBuilder: (_, index) {
-        Food food = favoriteFood[index];
+        Food food = FoodState().foodById(favoriteIds[index]);
         return Card(
           color: Theme.of(context).brightness == Brightness.light ? Colors.white :
           DarkThemeColor.primaryLight,

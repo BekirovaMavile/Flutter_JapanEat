@@ -16,11 +16,15 @@ class HomeScreen extends StatefulWidget {
 
 class HomeScreenState extends State<HomeScreen> {
   int get currentIndex => FoodState().tabIndex;
+  GlobalKey<CartScreenState> _cartKey = GlobalKey();
+  GlobalKey<FavoriteScreenState> _favoriteKey = GlobalKey();
 
   void onTabTap (int index) async {
     await FoodState().onTabTap(index);
     setState(() {
     });
+    if(index == 1) _cartKey.currentState?.update();
+    if(index == 2) _favoriteKey.currentState?.update();
   }
 
   @override
@@ -50,5 +54,5 @@ class HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  final List<Widget> screens = [const FoodList(), const CartScreen(), const FavoriteScreen(), const ProfileScreen()];
+  late final List<Widget> screens = [const FoodList(), CartScreen(key: _cartKey,), FavoriteScreen(key: _favoriteKey,), const ProfileScreen()];
 }

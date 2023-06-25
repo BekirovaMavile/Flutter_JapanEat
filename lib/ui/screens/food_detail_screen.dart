@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_japan_eat/states/food_state.dart';
+import 'package:flutter_japan_eat/ui/screens/cart_screen.dart';
 
 import '../../data/app_data.dart';
 import '../../ui_kit/app_color.dart';
@@ -6,6 +8,7 @@ import '../../ui_kit/app_icon.dart';
 import '../widgets/counter_button.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import '../../data/models/food.dart';
 
 class FoodDetail extends StatefulWidget {
   const FoodDetail({super.key});
@@ -15,7 +18,38 @@ class FoodDetail extends StatefulWidget {
 }
 
 class FoodDetailState extends State<FoodDetail> {
-  final food = AppData.food;
+  int get selectedFood => FoodState().selectedFood;
+  Food get food => FoodState().foodById(selectedFood);
+  late int _amount = food.quantity;
+
+  void onIncrementTap(){
+    _amount++;
+    setState(() {});
+  }
+
+  void onDecrementTap(){
+    if(_amount == 1) return;
+    _amount--;
+    setState(() {
+    });
+  }
+
+  void onAddToCart() async {
+    await FoodState().onAddToCartTap(selectedFood, _amount);
+    Navigator.of(context).push(
+        MaterialPageRoute(
+            builder: (_) => const CartScreen()
+        )
+    );
+  }
+
+  void onDeleteAddFavorite() async {
+    await FoodState().onDeleteAddFavorite(selectedFood);
+    setState(() {
+    });
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -49,7 +83,7 @@ class FoodDetailState extends State<FoodDetail> {
     return FloatingActionButton(
       elevation: 0.0,
       backgroundColor: LightThemeColor.accent,
-      onPressed: () {},
+      onPressed: onDeleteAddFavorite,
       child: food.isFavorite
           ? const Icon(AppIcon.heart)
           : const Icon(AppIcon.outlinedHeart),
@@ -117,10 +151,10 @@ class FoodDetailState extends State<FoodDetail> {
                                     ?.copyWith(color: LightThemeColor.accent),
                               ),
                               CounterButton(
-                                onIncrementTap: (){},
-                                onDecrementTap: (){},
+                                onIncrementTap: onIncrementTap,
+                                onDecrementTap: onDecrementTap,
                                 label: Text(
-                                  food.quantity.toString(),
+                                  _amount.toString(),
                                   style: Theme.of(context).textTheme.displayLarge,
                                 ),
                               )
@@ -143,7 +177,7 @@ class FoodDetailState extends State<FoodDetail> {
                             child: Padding(
                               padding: const EdgeInsets.symmetric(horizontal: 30),
                               child: ElevatedButton(
-                                onPressed: (){},
+                                onPressed: onAddToCart,
                                 child: const Text("Add to cart"),
                               ),
                             ),

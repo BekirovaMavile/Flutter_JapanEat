@@ -27,8 +27,9 @@ class FoodListView extends StatelessWidget {
             Food food = isReversed ? FoodState().foodById(foodIds.reversed.toList()[index]) : FoodState().foodById(foodIds[index]);
             // Food food = isReversed ? foods.reversed.toList()[index] : foods[index];
             return GestureDetector(
-                onTap: (){
+                onTap: () async {
                   print('Клик на карточку');
+                  await FoodState().onFoodTap(food.id);
                   Navigator.of(context).push(
                       MaterialPageRoute(
                           builder: (_) => const FoodDetail()
