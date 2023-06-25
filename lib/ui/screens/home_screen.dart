@@ -38,6 +38,7 @@ class HomeScreenState extends State<HomeScreen> {
       ),
 
       bottomNavigationBar: BottomNavigationBar(
+        key: FoodState().tabKey,
         currentIndex: currentIndex,
         onTap: onTabTap,
         selectedFontSize: 0,

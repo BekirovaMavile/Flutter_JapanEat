@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_japan_eat/states/food_state.dart';
-import 'package:flutter_japan_eat/ui/screens/cart_screen.dart';
-
+import '../../data/models/food.dart';
 import '../../data/app_data.dart';
 import '../../ui_kit/app_color.dart';
 import '../../ui_kit/app_icon.dart';
 import '../widgets/counter_button.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import '../../data/models/food.dart';
+
 
 class FoodDetail extends StatefulWidget {
   const FoodDetail({super.key});
@@ -18,37 +17,79 @@ class FoodDetail extends StatefulWidget {
 }
 
 class FoodDetailState extends State<FoodDetail> {
-  int get selectedFood => FoodState().selectedFood;
-  Food get food => FoodState().foodById(selectedFood);
+  int get foodId => FoodState().selectedFood;
+  Food get food => FoodState().foodById(foodId);
   late int _amount = food.quantity;
+  // final food = AppData.food;
+  bool isOpenCart = false;
 
-  void onIncrementTap(){
+  void onIncrementTap() {
     _amount++;
     setState(() {});
   }
 
-  void onDecrementTap(){
-    if(_amount == 1) return;
+  void onDecrementTap() {
+    if (_amount == 1) return;
     _amount--;
+    setState(() {});
+  }
+
+  void onAddToCart() async{
+    await FoodState().onAddToCartTap(foodId, _amount);
+    await _showDialog();
+    if(isOpenCart){
+      isOpenCart = false;
+      final BottomNavigationBar navigationBar = FoodState().tabKey.currentWidget as BottomNavigationBar;
+      navigationBar.onTap?.call(1);
+      Navigator.of(context).pop();
+    }
+  }
+
+  void onAddDeleteFavorite() async {
+    await FoodState().onDeleteAddFavorite(foodId);
     setState(() {
     });
   }
 
-  void onAddToCart() async {
-    await FoodState().onAddToCartTap(selectedFood, _amount);
-    Navigator.of(context).push(
-        MaterialPageRoute(
-            builder: (_) => const CartScreen()
-        )
+  Future<void> _showDialog() async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context){
+        return AlertDialog(
+          title: const Text('Food added to cart'),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: const [
+                Text(
+                    'Do you want open cart?'
+                ),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: const Text(
+                'No',
+                style:TextStyle(color:LightThemeColor.accent),),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+            TextButton(
+              child: const Text(
+                'Yes',
+                style:TextStyle(color: LightThemeColor.accent),),
+              onPressed: () {
+                isOpenCart = true;
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
     );
   }
-
-  void onDeleteAddFavorite() async {
-    await FoodState().onDeleteAddFavorite(selectedFood);
-    setState(() {
-    });
-  }
-
 
   @override
   Widget build(BuildContext context) {
@@ -83,7 +124,7 @@ class FoodDetailState extends State<FoodDetail> {
     return FloatingActionButton(
       elevation: 0.0,
       backgroundColor: LightThemeColor.accent,
-      onPressed: onDeleteAddFavorite,
+      onPressed: onAddDeleteFavorite,
       child: food.isFavorite
           ? const Icon(AppIcon.heart)
           : const Icon(AppIcon.outlinedHeart),

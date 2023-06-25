@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 import '../../data/app_data.dart';
 import '../data/models/food.dart';
 class FoodState {
@@ -21,6 +23,7 @@ class FoodState {
 
   List<int> cartIds = [];
   List<int> favoriteIds = [];
+  GlobalKey tabKey = GlobalKey();
 
   Future<void> onTabTap (int index) async {
     if(_tabIndex != index){
