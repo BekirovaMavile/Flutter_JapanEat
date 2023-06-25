@@ -95,7 +95,10 @@ class FoodListState extends State<FoodList> {
     return AppBar(
       leading: IconButton(
         icon: FaIcon(FontAwesomeIcons.dice),
-        onPressed: () {},
+        onPressed: () {
+          FoodState().isLight.value =
+          !FoodState().isLight.value;
+        },
       ),
       title: Row(
         mainAxisAlignment: MainAxisAlignment.center,
