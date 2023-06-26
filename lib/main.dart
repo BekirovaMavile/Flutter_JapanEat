@@ -9,11 +9,11 @@ import 'package:flutter_japan_eat/ui_kit/_ui_kit.dart';
 import 'package:flutter_japan_eat/ui/screens/food_list_screen.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  MyApp({super.key});
 
   // This widget is the root of your application.
   @override

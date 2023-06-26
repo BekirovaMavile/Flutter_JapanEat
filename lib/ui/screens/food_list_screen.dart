@@ -7,7 +7,7 @@ import 'package:flutter_japan_eat/ui/widgets/food_list_view.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../../ui_kit/_ui_kit.dart';
 import '../../data/app_data.dart';
-// import 'package:flutter_project/data/app_data.dart';
+
 
 class FoodList extends StatefulWidget {
   const FoodList({super.key});
@@ -20,7 +20,7 @@ class FoodListState extends State<FoodList> {
   List<FoodCategory> get categories => FoodState().categories;
   List<int> get foodIds => FoodState().foodIds;
   List<int> get foodIdsByCategory => FoodState().foodIdsByCategory;
-  // bool isDarkMode = false;
+  // bool isLight = true;
 
   void onCategoryTap(int index) async {
     await FoodState().categoryTab(index);
@@ -28,12 +28,6 @@ class FoodListState extends State<FoodList> {
     });
   }
 
-  // void toggleTheme() {
-  //   setState(() {
-  //     isDarkMode = !isDarkMode;
-  //     // if (AppTheme.lightTheme);
-  //   });
-  // }
 
   @override
   Widget build(BuildContext context) => Scaffold(
@@ -98,7 +92,7 @@ class FoodListState extends State<FoodList> {
         onPressed: () {
           FoodState().isLight.value =
           !FoodState().isLight.value;
-        },
+        }
       ),
       title: Row(
         mainAxisAlignment: MainAxisAlignment.center,

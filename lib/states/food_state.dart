@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 
 import '../../data/app_data.dart';
@@ -25,6 +26,7 @@ class FoodState {
   List<int> favoriteIds = [];
   GlobalKey tabKey = GlobalKey();
   ValueNotifier<bool> isLight = ValueNotifier(true);
+
 
   Future<void> onTabTap (int index) async {
     if(_tabIndex != index){
@@ -110,4 +112,6 @@ class FoodState {
     final food = foodById(id);
     food.isFavorite = !food.isFavorite;
   }
+
 }
+
