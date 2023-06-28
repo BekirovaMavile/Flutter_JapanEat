@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_japan_eat/states/food_state.dart';
 import 'package:flutter_japan_eat/ui/screens/cart_screen.dart';
 import 'package:flutter_japan_eat/ui/screens/favorite_screen.dart';
 import 'package:flutter_japan_eat/ui/screens/food_detail_screen.dart';
@@ -17,10 +18,14 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Japan Eat',
-      theme: AppTheme.lightTheme,
-      home: const HomeScreen(),
+    return ValueListenableBuilder(
+      valueListenable: FoodState().isLight,
+      builder: (_, isLight, __) =>
+       MaterialApp(
+        title: 'Japan Eat',
+        theme: isLight ? AppTheme.lightTheme : AppTheme.darkTheme,
+        home: const HomeScreen(),
+      ),
     );
   }
 }

@@ -20,7 +20,6 @@ class FoodListState extends State<FoodList> {
   List<FoodCategory> get categories => FoodState().categories;
   List<int> get foodIds => FoodState().foodIds;
   List<int> get foodIdsByCategory => FoodState().foodIdsByCategory;
-  // bool isDarkMode = false;
 
   void onCategoryTap(int index) async {
     await FoodState().categoryTab(index);
@@ -28,12 +27,11 @@ class FoodListState extends State<FoodList> {
     });
   }
 
-  // void toggleTheme() {
-  //   setState(() {
-  //     isDarkMode = !isDarkMode;
-  //     // if (AppTheme.lightTheme);
-  //   });
-  // }
+  void isLightTap(){
+    FoodState().isLight.value = !FoodState().isLight.value;
+    setState(() {
+    });
+  }
 
   @override
   Widget build(BuildContext context) => Scaffold(
@@ -95,7 +93,7 @@ class FoodListState extends State<FoodList> {
     return AppBar(
       leading: IconButton(
         icon: FaIcon(FontAwesomeIcons.dice),
-        onPressed: () {},
+        onPressed: isLightTap,
       ),
       title: Row(
         mainAxisAlignment: MainAxisAlignment.center,

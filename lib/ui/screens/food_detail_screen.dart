@@ -21,6 +21,7 @@ class FoodDetailState extends State<FoodDetail> {
   int get selectedFood => FoodState().selectedFood;
   Food get food => FoodState().foodById(selectedFood);
   late int _amount = food.quantity;
+  bool isOpenCart = false;
 
   void onIncrementTap(){
     _amount++;
@@ -36,11 +37,13 @@ class FoodDetailState extends State<FoodDetail> {
 
   void onAddToCart() async {
     await FoodState().onAddToCartTap(selectedFood, _amount);
-    Navigator.of(context).push(
-        MaterialPageRoute(
-            builder: (_) => const CartScreen()
-        )
-    );
+    await _showDialog();
+    if(isOpenCart){
+      isOpenCart = false;
+      final BottomNavigationBar navigationBar = FoodState().tabKey.currentWidget as BottomNavigationBar;
+      navigationBar.onTap?.call(1);
+      Navigator.of(context).pop();
+    }
   }
 
   void onDeleteAddFavorite() async {
@@ -49,6 +52,38 @@ class FoodDetailState extends State<FoodDetail> {
     });
   }
 
+  Future<void> _showDialog() async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: true,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text("Add to cart"),
+          content: SingleChildScrollView(
+            child: ListBody(children: const [
+              Text("Do you want open to cart?"),
+            ],
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: const Text("No", style: TextStyle(color: LightThemeColor.accent),),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+            TextButton(
+              child: const Text("Yes", style: TextStyle(color: LightThemeColor.accent),),
+              onPressed: () {
+                isOpenCart = true;
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      }
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
