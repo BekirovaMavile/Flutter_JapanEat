@@ -21,7 +21,9 @@ class FoodDetailState extends State<FoodDetail> {
   Food get food => FoodState().foodById(foodId);
   late int _amount = food.quantity;
   bool isOpenCart = false;
-  double _size = 10;
+  // double _size = 10;
+  double _opacity = 0;
+
 
   void onIncrementTap() {
     _amount++;
@@ -93,7 +95,8 @@ class FoodDetailState extends State<FoodDetail> {
 
   void startAnimation(){
     Future.delayed(const Duration(milliseconds: 100), () {
-      _size = 300;
+      // _size = 300;
+      _opacity = 1;
       setState(() {
       });
     });
@@ -110,11 +113,12 @@ class FoodDetailState extends State<FoodDetail> {
     return Scaffold(
         appBar: _appBar(context),
         body: Center(
-            child: AnimatedContainer(
-              width: _size,
-                height: _size,
+            child: AnimatedOpacity(
+              opacity: _opacity,
+              // width: _size,
+                // height: _size,
                 duration: const Duration(seconds: 2),
-                curve: Curves.bounceOut,
+                curve: Curves.easeOut,
                 child: Image.asset(
                     food.image, scale: 2),
             ),
