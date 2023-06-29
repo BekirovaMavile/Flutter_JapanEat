@@ -21,8 +21,6 @@ class FoodDetailState extends State<FoodDetail> {
   Food get food => FoodState().foodById(foodId);
   late int _amount = food.quantity;
   bool isOpenCart = false;
-  // double _size = 10;
-  double _opacity = 0;
 
 
   void onIncrementTap() {
@@ -93,35 +91,21 @@ class FoodDetailState extends State<FoodDetail> {
     );
   }
 
-  void startAnimation(){
-    Future.delayed(const Duration(milliseconds: 100), () {
-      // _size = 300;
-      _opacity = 1;
-      setState(() {
-      });
-    });
-  }
-
-  @override
-  void initState() {
-    startAnimation();
-    super.initState();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: _appBar(context),
         body: Center(
-            child: AnimatedOpacity(
-              opacity: _opacity,
-              // width: _size,
-                // height: _size,
-                duration: const Duration(seconds: 2),
-                curve: Curves.easeOut,
-                child: Image.asset(
-                    food.image, scale: 2),
-            ),
+                child: TweenAnimationBuilder(
+                  duration: const Duration(seconds: 2),
+                  tween: Tween<double>(begin: 0.1, end: 1),
+                  builder: (_, double scale, __) {
+                    return Transform.scale(
+                      scale: scale,
+                      child: Image.asset(food.image, scale: 2),
+                    );
+                  },
+                ),
         ),
         floatingActionButton: _floatingActionButton(),
         bottomNavigationBar: _bottomAppBar(),
