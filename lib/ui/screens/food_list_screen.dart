@@ -28,6 +28,12 @@ class FoodListState extends State<FoodList> {
     });
   }
 
+  void isLightTap() {
+    FoodState().isLightTap();
+    setState(() {
+    });
+  }
+
 
   @override
   Widget build(BuildContext context) => Scaffold(
@@ -89,10 +95,10 @@ class FoodListState extends State<FoodList> {
     return AppBar(
       leading: IconButton(
         icon: FaIcon(FontAwesomeIcons.dice),
-        onPressed: () {
-          FoodState().isLight.value =
-          !FoodState().isLight.value;
-        }
+        onPressed: isLightTap,
+          // FoodState().isLight.value =
+          // !FoodState().isLight.value;
+        // }
       ),
       title: Row(
         mainAxisAlignment: MainAxisAlignment.center,

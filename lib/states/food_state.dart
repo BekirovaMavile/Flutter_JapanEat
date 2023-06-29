@@ -25,8 +25,12 @@ class FoodState {
   List<int> cartIds = [];
   List<int> favoriteIds = [];
   GlobalKey tabKey = GlobalKey();
-  ValueNotifier<bool> isLight = ValueNotifier(true);
+  // ValueNotifier<bool> isLight = ValueNotifier(true);
+bool isLight = true;
 
+Future<void> isLightTap() async {
+  isLight = !isLight;
+}
 
   Future<void> onTabTap (int index) async {
     if(_tabIndex != index){
