@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_japan_eat/states/food_state.dart';
+import 'package:flutter_japan_eat/ui/_ui.dart';
 import 'profile_screen.dart';
 
 import '../../data/app_data.dart';
@@ -30,12 +31,10 @@ class HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: IndexedStack(
-          index: currentIndex,
-          children: screens,
-        ),
+      body: PageTransition(
+        child: screens[currentIndex],
       ),
+
 
       bottomNavigationBar: BottomNavigationBar(
         key: FoodState().tabKey,
