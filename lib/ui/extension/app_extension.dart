@@ -11,4 +11,7 @@ extension WidgetExtension on Widget {
     child: this,
   );
   Widget get explicitAnimation => ExplicitAnimation(child: this);
+  Widget get sizeExplicitAnimation =>
+      SizeExplicitAnimation(child: this);
+
 }
