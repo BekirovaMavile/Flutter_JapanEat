@@ -98,9 +98,9 @@ class FoodDetailState extends State<FoodDetail> {
     return Scaffold(
         appBar: _appBar(context),
         body: Center(
-                // child: ScaleTweenAnimationsBuilder(
-                      child: Image.asset(food.image, scale: 2).scaleImplicitAnimation,
-                    // ),
+                child: ExplicitAnimation(
+                      child: Image.asset(food.image, width: 250).explicitAnimation,
+                    ),
                 ),
         floatingActionButton: _floatingActionButton(),
         bottomNavigationBar: _bottomAppBar(),

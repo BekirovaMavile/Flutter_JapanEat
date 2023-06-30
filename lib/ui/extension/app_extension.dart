@@ -10,4 +10,5 @@ extension WidgetExtension on Widget {
   Widget get scaleImplicitAnimation => ScaleTweenAnimationsBuilder(
     child: this,
   );
+  Widget get explicitAnimation => ExplicitAnimation(child: this);
 }
