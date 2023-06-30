@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_japan_eat/states/food_state.dart';
+import 'package:flutter_japan_eat/ui/extension/app_extension.dart';
 import 'package:flutter_japan_eat/ui_kit/app_color.dart';
 import '../../ui_kit/app_text_style.dart';
 import '../../data/models/food.dart';
@@ -58,7 +59,7 @@ class FoodListView extends StatelessWidget {
                         style: Theme.of(context).textTheme.headlineMedium?.copyWith(fontWeight: FontWeight.bold),
                       ),
                     ],
-                  ),
+                  ).fadeAnimation(0.7),
                 )
             ),
             );

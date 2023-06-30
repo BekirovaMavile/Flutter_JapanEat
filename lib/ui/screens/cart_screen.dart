@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_japan_eat/ui/extension/app_extension.dart';
 import '../../data/models/food.dart';
 import '../../states/food_state.dart';
 import '../widgets/empty_wrapper.dart';
@@ -148,7 +149,7 @@ class CartScreenState extends State<CartScreen> {
                 )
               ],
             ),
-          ),
+          ).fadeAnimation(index * 0.6),
         );
       },
       separatorBuilder: (_, __) => Container(

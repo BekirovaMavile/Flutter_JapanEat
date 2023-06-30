@@ -44,11 +44,11 @@ class FoodListState extends State<FoodList> {
               Text(
                 "Morning, Mavile",
                 style: Theme.of(context).textTheme.headlineSmall,
-              ),
+              ).fadeAnimation(0.2),
               Text(
                 "What do you want to eat \ntoday",
                 style: Theme.of(context).textTheme.displayLarge,
-              ),
+              ).fadeAnimation(0.4),
               _searchBar(),
               Text(
                 "Available for you",

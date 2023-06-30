@@ -185,7 +185,7 @@ class FoodDetailState extends State<FoodDetail> {
                                 style: Theme.of(context).textTheme.titleMedium,
                               )
                             ],
-                          ),
+                          ).fadeAnimation(0.4),
                           const SizedBox(height: 15),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -206,17 +206,17 @@ class FoodDetailState extends State<FoodDetail> {
                                 ),
                               )
                             ],
-                          ),
+                          ).fadeAnimation(0.6),
                           const SizedBox(height: 15),
                           Text(
                             "Description",
                             style: Theme.of(context).textTheme.displayMedium,
-                          ),
+                          ).fadeAnimation(0.8),
                           const SizedBox(height: 15),
                           Text(
                             food.description,
                             style: Theme.of(context).textTheme.titleMedium,
-                          ),
+                          ).fadeAnimation(0.8),
                           const SizedBox(height: 30),
                           SizedBox(
                             width: double.infinity,

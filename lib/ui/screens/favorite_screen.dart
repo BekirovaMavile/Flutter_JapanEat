@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_japan_eat/states/food_state.dart';
+import 'package:flutter_japan_eat/ui/extension/app_extension.dart';
 
 import '../../data/app_data.dart';
 import '../../data/models/food.dart';
@@ -70,7 +71,7 @@ class FavoriteScreenState extends State<FavoriteScreen> {
             ),
             trailing: const Icon(AppIcon.heart, color: Colors.redAccent),
           ),
-        );
+        ).fadeAnimation(index * 0.6);
       },
       separatorBuilder: (_, __) => Container(
         height: 20,

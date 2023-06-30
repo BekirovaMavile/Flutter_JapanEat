@@ -15,4 +15,9 @@ extension WidgetExtension on Widget {
       SizeExplicitAnimation(child: this);
   Widget get scaleAnimation =>
       ScaleAnimation(child: this);
+
+  Widget fadeAnimation(double delay) {
+    return FadeAnimation(delay: delay, child: this);
+  }
+
 }
