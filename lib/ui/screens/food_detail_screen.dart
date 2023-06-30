@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_japan_eat/states/food_state.dart';
+import 'package:flutter_japan_eat/ui/widgets/_widgets.dart';
 import '../../data/models/food.dart';
 import '../../data/app_data.dart';
 import '../../ui_kit/app_color.dart';
@@ -96,17 +97,10 @@ class FoodDetailState extends State<FoodDetail> {
     return Scaffold(
         appBar: _appBar(context),
         body: Center(
-                child: TweenAnimationBuilder(
-                  duration: const Duration(seconds: 2),
-                  tween: Tween<double>(begin: 0.1, end: 1),
-                  builder: (_, double scale, __) {
-                    return Transform.scale(
-                      scale: scale,
+                child: ScaleTweenAnimationsBuilder(
                       child: Image.asset(food.image, scale: 2),
-                    );
-                  },
+                    ),
                 ),
-        ),
         floatingActionButton: _floatingActionButton(),
         bottomNavigationBar: _bottomAppBar(),
         floatingActionButtonLocation: FloatingActionButtonLocation.endDocked);

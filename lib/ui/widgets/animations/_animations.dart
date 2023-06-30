@@ -1,0 +1,1 @@
+export 'scale_tween_builder_animation.dart';
