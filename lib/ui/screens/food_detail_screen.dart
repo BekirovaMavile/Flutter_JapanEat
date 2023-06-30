@@ -99,7 +99,7 @@ class FoodDetailState extends State<FoodDetail> {
         appBar: _appBar(context),
         body: Center(
                 child: ExplicitAnimation(
-                      child: Image.asset(food.image, width: 250).sizeExplicitAnimation,
+                      child: Image.asset(food.image, width: 250).scaleAnimation,
                     ),
                 ),
         floatingActionButton: _floatingActionButton(),

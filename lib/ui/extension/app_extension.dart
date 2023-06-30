@@ -13,5 +13,6 @@ extension WidgetExtension on Widget {
   Widget get explicitAnimation => ExplicitAnimation(child: this);
   Widget get sizeExplicitAnimation =>
       SizeExplicitAnimation(child: this);
-
+  Widget get scaleAnimation =>
+      ScaleAnimation(child: this);
 }
