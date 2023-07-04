@@ -22,6 +22,7 @@ class FoodDetailState extends State<FoodDetail> {
   late int _amount = food.quantity;
   bool isOpenCart = false;
   double _size = 10;
+  Color _color = Colors.pink;
 
   void onIncrementTap() {
     _amount++;
@@ -92,8 +93,14 @@ class FoodDetailState extends State<FoodDetail> {
   }
 
   void startAnimation(){
+    // _size = 300;
+    // print("print");
+    // setState(() {
+    // });
     Future.delayed(const Duration(milliseconds: 100), () {
+      print("print");
       _size = 300;
+      _color = Colors.black;
       setState(() {
       });
     });
@@ -107,12 +114,14 @@ class FoodDetailState extends State<FoodDetail> {
 
   @override
   Widget build(BuildContext context) {
+    print("lala");
     return Scaffold(
         appBar: _appBar(context),
         body: Center(
             child: AnimatedContainer(
               width: _size,
                 height: _size,
+                color: _color,
                 duration: const Duration(seconds: 2),
                 curve: Curves.bounceOut,
                 child: Image.asset(
