@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import '../../data/app_data.dart';
 import '../data/models/food.dart';
+import '../main.dart';
 class FoodState {
   FoodState._();
   static final _instance = FoodState._();
@@ -25,12 +26,14 @@ class FoodState {
   List<int> cartIds = [];
   List<int> favoriteIds = [];
   GlobalKey tabKey = GlobalKey();
+  GlobalKey<MyAppState> themeKey = GlobalKey();
   // ValueNotifier<bool> isLight = ValueNotifier(true);
-bool isLight = true;
+  bool isLight = true;
 
-Future<void> isLightTap() async {
-  isLight = !isLight;
-}
+  Future<void> toggleTheme() async {
+    isLight = !isLight;
+    themeKey.currentState?.update();
+  }
 
   Future<void> onTabTap (int index) async {
     if(_tabIndex != index){

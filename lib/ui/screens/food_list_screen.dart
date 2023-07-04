@@ -28,9 +28,9 @@ class FoodListState extends State<FoodList> {
     });
   }
 
-  void isLightTap() {
-    FoodState().isLightTap();
+  void _toggleTheme() {
     setState(() {
+      FoodState().toggleTheme();
     });
   }
 
@@ -95,7 +95,7 @@ class FoodListState extends State<FoodList> {
     return AppBar(
       leading: IconButton(
         icon: FaIcon(FontAwesomeIcons.dice),
-        onPressed: isLightTap,
+        onPressed: _toggleTheme,
           // FoodState().isLight.value =
           // !FoodState().isLight.value;
         // }

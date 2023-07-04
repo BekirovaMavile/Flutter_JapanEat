@@ -9,12 +9,22 @@ import 'package:flutter_japan_eat/ui_kit/_ui_kit.dart';
 import 'package:flutter_japan_eat/ui/screens/food_list_screen.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(MyApp(key: FoodState().themeKey,));
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   MyApp({super.key});
 
+  @override
+  State<MyApp> createState() => MyAppState();
+}
+
+class MyAppState extends State<MyApp> {
+
+  void update(){
+    setState(() {
+    });
+  }
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
