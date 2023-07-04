@@ -98,7 +98,13 @@ class FoodDetailState extends State<FoodDetail> {
         appBar: _appBar(context),
         body: Center(
                 child: ScaleTweenAnimationsBuilder(
-                      child: Image.asset(food.image, scale: 2),
+                  child: Container(
+                    width: 300,
+                    height: 300,
+                    // color: Colors.purple,
+                    decoration: BoxDecoration(borderRadius: BorderRadius.circular(150), color: Colors.purple),
+                  ),
+                      // child: Image.asset(food.image, scale: 2),
                     ),
                 ),
         floatingActionButton: _floatingActionButton(),
