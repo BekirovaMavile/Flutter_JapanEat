@@ -20,7 +20,7 @@ class _ExplicitAnimationState extends State<ExplicitAnimation> with SingleTicker
     // ..addListener(() {setState(() {
     // });
     // });
-    controller.forward();
+    // controller.forward();
   }
 
   @override
