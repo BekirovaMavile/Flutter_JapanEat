@@ -204,7 +204,7 @@ class FoodDetailState extends State<FoodDetail> {
                                   _amount.toString(),
                                   style: Theme.of(context).textTheme.displayLarge,
                                 ),
-                              )
+                              ).scaleImplicitAnimation
                             ],
                           ),
                           const SizedBox(height: 15),
