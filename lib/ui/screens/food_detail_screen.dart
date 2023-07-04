@@ -104,7 +104,7 @@ class FoodDetailState extends State<FoodDetail> {
 
   @override
   void initState() {
-    startAnimation();
+    // startAnimation();
     super.initState();
   }
 
@@ -151,7 +151,11 @@ class FoodDetailState extends State<FoodDetail> {
     return FloatingActionButton(
       elevation: 0.0,
       backgroundColor: LightThemeColor.accent,
-      onPressed: onAddDeleteFavorite,
+      onPressed: ()
+    {
+      onAddDeleteFavorite();
+      startAnimation();
+      },
       child: food.isFavorite
           ? const Icon(AppIcon.heart)
           : const Icon(AppIcon.outlinedHeart),
