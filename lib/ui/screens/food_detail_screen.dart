@@ -98,9 +98,9 @@ class FoodDetailState extends State<FoodDetail> {
     // setState(() {
     // });
     Future.delayed(const Duration(milliseconds: 100), () {
-      print("print");
+      // print("print");
       _size = 300;
-      _color = Colors.black;
+      // _color = Colors.black;
       setState(() {
       });
     });
