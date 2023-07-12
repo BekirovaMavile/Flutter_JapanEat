@@ -19,5 +19,8 @@ extension WidgetExtension on Widget {
   Widget fadeAnimation(double delay) {
     return FadeAnimation(delay: delay, child: this);
   }
+  // Widget SimpleAnimation(double delay) {
+  //   return SimpleAnimation(delay: delay);
+  // }
 
 }

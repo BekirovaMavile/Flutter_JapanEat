@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_japan_eat/ui/_ui.dart';
 import 'package:flutter_japan_eat/ui/extension/app_extension.dart';
 import '../../data/models/food.dart';
 import '../../states/food_state.dart';
@@ -248,10 +249,12 @@ class CartScreenState extends State<CartScreen> {
                           child: Padding(
                             padding: const
                             EdgeInsets.symmetric(horizontal: 30),
-                            child: ElevatedButton(
-                              onPressed: onCleanCart,
-                              child: const
-                              Text("Checkout"),
+                            child: SimpleAnimation(
+                              child: ElevatedButton(
+                                onPressed: onCleanCart,
+                                  child: const
+                                Text("Checkout"),
+                              ),
                             ),
                           ),
                         )

@@ -9,6 +9,8 @@ import '../../ui_kit/app_icon.dart';
 import '../widgets/counter_button.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:simple_animations/simple_animations.dart';
+import 'package:flutter/rendering.dart';
 
 
 class FoodDetail extends StatefulWidget {
@@ -114,12 +116,14 @@ class FoodDetailState extends State<FoodDetail> {
       //   icon: const Icon(Icons.arrow_back),
       // ),
       title: Text(
-        'Food Detail Screen',
-        style: TextStyle(
-            color: Theme.of(context).brightness == Brightness.light
-                ? Colors.black
-                : Colors.white),
-      ),
+              'Food Detail Screen',
+              style: TextStyle(
+                  color: Theme
+                      .of(context)
+                      .brightness == Brightness.light
+                      ? Colors.black
+                      : Colors.white),
+            ),
       actions: [
         IconButton(onPressed: () {}, icon: const Icon(Icons.more_vert))
       ],
