@@ -1,85 +1,46 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_japan_eat/states/food_state.dart';
-import 'package:flutter_japan_eat/ui/screens/cart_screen.dart';
-import 'package:flutter_japan_eat/ui/screens/favorite_screen.dart';
-import 'package:flutter_japan_eat/ui/screens/food_detail_screen.dart';
-import 'package:flutter_japan_eat/ui/screens/home_screen.dart';
-import 'package:flutter_japan_eat/ui/screens/profile_screen.dart';
-import 'package:flutter_japan_eat/ui_kit/_ui_kit.dart';
-import 'package:flutter_japan_eat/ui/screens/food_list_screen.dart';
+import 'package:simple_animations/simple_animations.dart';
 
-void main() {
-  runApp(const MyApp());
+void main() =>
+    runApp(const MaterialApp(home: Scaffold(body: Center(child: Page()))));
+
+class Page extends StatefulWidget {
+  const Page({Key? key}) : super(key: key);
+
+  @override
+  _PageState createState() => _PageState();
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class _PageState extends State<Page> {
+  Control control = Control.play; // state variable
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return ValueListenableBuilder(
-      valueListenable: FoodState().isLight,
-      builder: (_, isLight, __) {
-        return MaterialApp(
-          title: 'Japan Eat',
-          theme: isLight
-              ? AppTheme.lightTheme
-              : AppTheme.darkTheme,
-          home: const HomeScreen(),
+    return CustomAnimationBuilder<double>(
+      duration: const Duration(seconds: 1),
+      control: control, // bind state variable to parameter
+      tween: Tween(begin: -100.0, end: 100.0),
+      builder: (context, value, child) {
+        return Transform.translate(
+          // animation that moves childs from left to right
+          offset: Offset(value, 0),
+          child: child,
         );
       },
+      child: MaterialButton(
+        // there is a button
+        color: Colors.yellow,
+        onPressed:
+        toggleDirection, // clicking button changes animation direction
+        child: const Text('Swap'),
+      ),
     );
   }
-}
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
+  void toggleDirection() {
+    // toggle between control instructions
     setState(() {
-      _counter++;
+      control = (control == Control.play) ? Control.playReverse : Control.play;
     });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'You have pushed the button this many times:',
-              style: AppTextStyle.h1Style,
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-            Image.asset(AppAsset.profileImage),
-            Icon(AppIcon.heart,
-            color: Theme.of(context).indicatorColor,)
-          ],
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ),
-    );
   }
 }

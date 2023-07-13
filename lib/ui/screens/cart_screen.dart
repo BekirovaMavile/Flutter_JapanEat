@@ -249,13 +249,13 @@ class CartScreenState extends State<CartScreen> {
                           child: Padding(
                             padding: const
                             EdgeInsets.symmetric(horizontal: 30),
-                            child: SimpleAnimation(
+                            // child: SimpleAnimation(
                               child: ElevatedButton(
                                 onPressed: onCleanCart,
                                   child: const
                                 Text("Checkout"),
                               ),
-                            ),
+                            // ),
                           ),
                         )
                       ],
