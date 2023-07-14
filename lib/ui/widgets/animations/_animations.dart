@@ -3,3 +3,4 @@ export 'explicit_animation.dart';
 export 'size_explicit_animation.dart';
 export 'scale_animation.dart';
 export 'fade_animation.dart';
+export 'simple_animations.dart';

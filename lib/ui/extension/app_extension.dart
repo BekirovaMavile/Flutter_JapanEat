@@ -20,4 +20,6 @@ extension WidgetExtension on Widget {
     return FadeAnimation(delay: delay, child: this);
   }
 
+  Widget get playAnimationsBuilder => PlayAnimationsBuilder(child: this, delay: 1,);
+
 }

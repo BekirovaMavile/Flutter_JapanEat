@@ -8,6 +8,7 @@ import '../../ui_kit/app_color.dart';
 import '../../ui_kit/app_text_style.dart';
 import '../widgets/counter_button.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:simple_animations/simple_animations.dart';
 
 class CartScreen extends StatefulWidget {
   const CartScreen({super.key});
@@ -252,7 +253,7 @@ class CartScreenState extends State<CartScreen> {
                               onPressed: onCleanCart,
                               child: const
                               Text("Checkout"),
-                            ),
+                            ).playAnimationsBuilder,
                           ),
                         )
                       ],
@@ -264,5 +265,4 @@ class CartScreenState extends State<CartScreen> {
       )
     );
   }
-
 }
