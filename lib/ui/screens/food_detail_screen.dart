@@ -23,6 +23,7 @@ class FoodDetailState extends State<FoodDetail> {
   Food get food => FoodState().foodById(foodId);
   late int _amount = food.quantity;
   bool isOpenCart = false;
+  // GlobalKey<ExplicitAnimationState> animationKey = GlobalKey();
 
 
   void onIncrementTap() {
@@ -99,6 +100,8 @@ class FoodDetailState extends State<FoodDetail> {
         appBar: _appBar(context),
         body: Center(
                 child: ExplicitAnimation(
+                  // isAutoPlay: false,
+                  //     key: animationKey,
                       child: Image.asset(food.image, width: 250).explicitAnimation,
                     ),
                 ),
@@ -122,6 +125,7 @@ class FoodDetailState extends State<FoodDetail> {
       ),
       actions: [
         IconButton(onPressed: () {
+          // animationKey.currentState?.startAnimation();
           // controller.forward();
         }, icon: const Icon(Icons.more_vert))
       ],

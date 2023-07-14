@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 class ExplicitAnimation extends StatefulWidget {
-  const ExplicitAnimation({Key? key, required this.child}) : super(key: key);
+  const ExplicitAnimation({Key? key, required this.child, this.isAutoPlay = true}) : super(key: key);
   final Widget child;
+  final bool isAutoPlay;
 
   @override
-  State<ExplicitAnimation> createState() => _ExplicitAnimationState();
+  State<ExplicitAnimation> createState() => ExplicitAnimationState();
 }
 
-class _ExplicitAnimationState extends State<ExplicitAnimation> with SingleTickerProviderStateMixin {
+class ExplicitAnimationState extends State<ExplicitAnimation> with SingleTickerProviderStateMixin {
   late AnimationController controller;
   late Animation<double> animation;
 
@@ -20,6 +21,12 @@ class _ExplicitAnimationState extends State<ExplicitAnimation> with SingleTicker
     // ..addListener(() {setState(() {
     // });
     // });
+    if(widget.isAutoPlay) {
+      controller.forward();
+    }
+  }
+
+  void startAnimation(){
     controller.forward();
   }
 
