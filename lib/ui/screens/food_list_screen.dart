@@ -8,6 +8,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../../ui_kit/_ui_kit.dart';
 import '../../data/app_data.dart';
 // import 'package:flutter_project/data/app_data.dart';
+import 'package:simple_animations/simple_animations.dart';
 
 class FoodList extends StatefulWidget {
   const FoodList({super.key});
@@ -54,7 +55,7 @@ class FoodListState extends State<FoodList> {
                 "Available for you",
                 style: Theme.of(context).textTheme.displaySmall,
               ),
-              _categories(),
+            _categories(),
               FoodListView(
                 foodIds: foodIdsByCategory,
               ),
@@ -172,3 +173,4 @@ class FoodListState extends State<FoodList> {
     );
   }
 }
+
