@@ -2,6 +2,8 @@ import 'package:badges/badges.dart';
 import 'package:flutter/material.dart' hide Badge;
 // ignore: depend_on_referenced_packages
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import '../../data/models/food_category.dart';
+import '../../states/food_state.dart';
 import '../../ui_kit/_ui_kit.dart';
 import '../../data/app_data.dart';
 import '../extension/app_extension.dart';
@@ -15,7 +17,15 @@ class FoodList extends StatefulWidget {
 }
 
 class FoodListState extends State<FoodList> {
-  var categories = AppData.categories;
+  // var categories = AppData.categories;
+
+  List<FoodCategory> get categories => FoodState().categories;
+
+  void onCategoryTap(FoodCategory category) async {
+    await FoodState().onCategoryTap(category);
+    setState(() {});
+  }
+
 
   @override
   Widget build(BuildContext context) => Scaffold(
@@ -27,7 +37,7 @@ class FoodListState extends State<FoodList> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              "Morning, Yuken",
+              "Morning, Mavi",
               style: Theme.of(context).textTheme.headlineSmall,
             ),
             Text(
@@ -125,7 +135,7 @@ class FoodListState extends State<FoodList> {
               final category = AppData.categories[index];
               return GestureDetector(
                 onTap: () {
-                  onCategoryTap(index);
+                  onCategoryTap(category);
                 },
                 child: Container(
                   width: 100,
@@ -153,11 +163,11 @@ class FoodListState extends State<FoodList> {
     );
   }
 
-  void onCategoryTap(int selectedIndex) {
-    //Меняем выбранную категорию
-    AppData.categories.asMap().forEach((index, category) {
-      category.isSelected = index == selectedIndex;
-    });
-    setState(() {});
-  }
+  // void onCategoryTap(int selectedIndex) {
+  //   //Меняем выбранную категорию
+  //   AppData.categories.asMap().forEach((index, category) {
+  //     category.isSelected = index == selectedIndex;
+  //   });
+  //   setState(() {});
+  // }
 }
