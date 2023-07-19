@@ -249,11 +249,12 @@ class CartScreenState extends State<CartScreen> {
                           child: Padding(
                             padding: const
                             EdgeInsets.symmetric(horizontal: 30),
-                            child: ElevatedButton(
-                              onPressed: onCleanCart,
-                              child: const
-                              Text("Checkout"),
-                            ).playAnimationsBuilder,
+                            child: _animation(),
+                            // child: ElevatedButton(
+                            //   onPressed: onCleanCart,
+                            //   child: const
+                            //   Text("Checkout"),
+                            // ).playAnimationsBuilder,
                           ),
                         )
                       ],
@@ -263,6 +264,28 @@ class CartScreenState extends State<CartScreen> {
               )
           )
       )
+    );
+  }
+
+  Widget _animation() {
+    return PlayAnimationBuilder<double>(
+      tween: Tween(begin: 70.0, end: 200.0),
+      duration: const Duration(seconds: 2),
+      delay: const Duration(seconds: 1),
+      curve: Curves.easeOut,
+      builder: (context, value, child) {
+        return ElevatedButton(
+          onPressed: onCleanCart,
+          // children:[
+          // const Text("Checkout"),
+          child: SizedBox(
+            width: value,
+            height: 50.0,
+            child: const Text("Checkout"),
+            //   color: Colors.orange,
+          ),
+        );
+      },
     );
   }
 }
