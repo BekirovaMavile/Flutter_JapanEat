@@ -28,8 +28,12 @@ class FoodState {
       categories.forEach((category) {
         category.isSelected = (category == selectedCategory);
       });
+      if (selectedCategory.type == 0) {
+        foodsByCategory = foods;
+      } else {
+        foodsByCategory = foods.where((food) => food.type == selectedCategory.type).toList();
+      }
     }
-
   }
 
   Future<void> onIncreaseQuantityTap(Food food) async {}
