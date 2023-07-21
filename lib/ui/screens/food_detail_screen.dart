@@ -9,6 +9,7 @@ import '../../ui_kit/app_icon.dart';
 import '../widgets/counter_button.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:simple_animations/simple_animations.dart';
 
 
 class FoodDetail extends StatefulWidget {
@@ -98,9 +99,10 @@ class FoodDetailState extends State<FoodDetail> {
     return Scaffold(
         appBar: _appBar(context),
         body: Center(
-                child: ExplicitAnimation(
-                      child: Image.asset(food.image, width: 250).scaleAnimation,
-                    ),
+          child: _animation(context),
+                // child: ExplicitAnimation(
+                //       child: Image.asset(food.image, width: 250).scaleAnimation,
+                    // ),
                 ),
         floatingActionButton: _floatingActionButton(),
         bottomNavigationBar: _bottomAppBar(),
@@ -153,6 +155,16 @@ class FoodDetailState extends State<FoodDetail> {
                     child: SingleChildScrollView(
                       child: Column(
                         children: [
+                          _animationTwo(),
+                          // SizedBox(
+                          //   width: double.infinity,
+                          //   height: 45,
+                          //   child: Padding(
+                          //     padding: const EdgeInsets.symmetric(horizontal: 30),
+                          //     child: _animation(context),
+                          //   ),
+                          // ),
+                          const SizedBox(height: 15),
                           Row(
                             children: [
                               RatingBar.builder(
@@ -236,6 +248,44 @@ class FoodDetailState extends State<FoodDetail> {
                 ))));
   }
 
+  Widget _animation(BuildContext context) {
+    return PlayAnimationBuilder<double>(
+      tween: Tween(begin: 100.0, end: 300.0),
+      duration: const Duration(seconds: 1),
+      delay: const Duration(seconds: 1),
+      curve: Curves.easeOut,
+      builder: (context, value, child) {
+        // return Container(
+        //   width: value,
+        //   height: 50.0,
+        //   color: Colors.orange,
+        // );
+        return SizedBox(
+          width: value,
+          height: 45,
+          child: ElevatedButton(
+            onPressed: () {},
+              child: const Text("Checkout"),
+          ),
+        );
+      },
+    );
+  }
 
-
+  Widget _animationTwo(){
+    return TweenAnimationBuilder(tween: Tween(begin: 100.0, end: 300.0),
+        duration: const Duration(seconds: 1),
+      curve: Curves.easeOut,
+        builder: (context, value, child) {
+          return SizedBox(
+            width: value,
+            height: 45,
+            child: ElevatedButton(
+              onPressed: () {},
+              child: const Text("Checkout"),
+            ),
+          );
+        },
+    );
+  }
 }
