@@ -243,20 +243,7 @@ class CartScreenState extends State<CartScreen> {
                           ),
                         ),
                         const SizedBox(height: 30),
-                        SizedBox(
-                          width: double.infinity,
-                          height: 45,
-                          child: Padding(
-                            padding: const
-                            EdgeInsets.symmetric(horizontal: 30),
-                            child: _animation(),
-                            // child: ElevatedButton(
-                            //   onPressed: onCleanCart,
-                            //   child: const
-                            //   Text("Checkout"),
-                            // ).playAnimationsBuilder,
-                          ),
-                        )
+                        _animation(context),
                       ],
                     ),
                   ),
@@ -267,22 +254,19 @@ class CartScreenState extends State<CartScreen> {
     );
   }
 
-  Widget _animation() {
+  Widget _animation(BuildContext context) {
     return PlayAnimationBuilder<double>(
-      tween: Tween(begin: 70.0, end: 200.0),
-      duration: const Duration(seconds: 2),
+      tween: Tween(begin: 100.0, end: 250.0),
+      duration: const Duration(seconds: 1),
       delay: const Duration(seconds: 1),
       curve: Curves.easeOut,
       builder: (context, value, child) {
-        return ElevatedButton(
-          onPressed: onCleanCart,
-          // children:[
-          // const Text("Checkout"),
-          child: SizedBox(
-            width: value,
-            height: 50.0,
+        return SizedBox(
+          width: value,
+          height: 45,
+          child: ElevatedButton(
+            onPressed: onCleanCart,
             child: const Text("Checkout"),
-            //   color: Colors.orange,
           ),
         );
       },
