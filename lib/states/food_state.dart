@@ -22,19 +22,22 @@ class FoodState {
   List<Food> get favorite => foods.where((element) => element.isFavorite).toList();
   ValueNotifier<bool> isLigth = ValueNotifier(true);
 
+
   //Действия
   Future<void> onCategoryTap(FoodCategory selectedCategory) async {
     if (categories.contains(selectedCategory)) {
       categories.forEach((category) {
         category.isSelected = (category == selectedCategory);
       });
-      if (selectedCategory.type == 0) {
+      if (selectedCategory == categories.first) {
         foodsByCategory = foods;
       } else {
         foodsByCategory = foods.where((food) => food.type == selectedCategory.type).toList();
       }
     }
   }
+
+
 
   Future<void> onIncreaseQuantityTap(Food food) async {}
 

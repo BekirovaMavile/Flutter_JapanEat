@@ -2,6 +2,7 @@ import 'package:badges/badges.dart';
 import 'package:flutter/material.dart' hide Badge;
 // ignore: depend_on_referenced_packages
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import '../../data/models/food.dart';
 import '../../data/models/food_category.dart';
 import '../../states/food_state.dart';
 import '../../ui_kit/_ui_kit.dart';
@@ -17,8 +18,7 @@ class FoodList extends StatefulWidget {
 }
 
 class FoodListState extends State<FoodList> {
-  // var categories = AppData.categories;
-
+  List<Food> get foodsByCategory => FoodState().foodsByCategory;
   List<FoodCategory> get categories => FoodState().categories;
 
   void onCategoryTap(FoodCategory category) async {
@@ -50,7 +50,10 @@ class FoodListState extends State<FoodList> {
               style: Theme.of(context).textTheme.displaySmall,
             ),
             _categories(),
-            FoodListView(foods: AppData.foodItems),
+            FoodListView(
+                foods: AppData.foodItems,
+                foodsByCategory: foodsByCategory,
+            ),
             Padding(
               padding: const EdgeInsets.only(top: 25, bottom: 5),
               child: Row(
@@ -73,7 +76,11 @@ class FoodListState extends State<FoodList> {
                 ],
               ),
             ),
-            FoodListView(foods: AppData.foodItems, isReversed: true),
+            FoodListView(
+                foods: AppData.foodItems,
+                isReversed: true,
+                foodsByCategory: foodsByCategory
+            ),
           ],
         ),
       ),
@@ -162,12 +169,4 @@ class FoodListState extends State<FoodList> {
       ),
     );
   }
-
-  // void onCategoryTap(int selectedIndex) {
-  //   //Меняем выбранную категорию
-  //   AppData.categories.asMap().forEach((index, category) {
-  //     category.isSelected = index == selectedIndex;
-  //   });
-  //   setState(() {});
-  // }
 }

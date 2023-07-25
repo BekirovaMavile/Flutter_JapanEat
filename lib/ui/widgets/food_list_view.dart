@@ -5,10 +5,12 @@ import '../../ui_kit/app_text_style.dart';
 import '../screens/food_detail_screen.dart';
 
 class FoodListView extends StatelessWidget {
-  const FoodListView({super.key, required this.foods, this.isReversed = false});
+  const FoodListView({super.key, required this.foods, required this.foodsByCategory, this.isReversed = false});
 
   final List<Food> foods;
+  final List<Food> foodsByCategory;
   final bool isReversed;
+
 
   @override
   Widget build(BuildContext context) {
@@ -22,9 +24,9 @@ class FoodListView extends StatelessWidget {
           itemBuilder: (_, index) {
             // ignore: unused_local_variable
             Food food =
-            isReversed ? foods.reversed.toList()[index] : foods[index];
+            isReversed ? foodsByCategory.reversed.toList()[index] : foodsByCategory[index];
             return GestureDetector(
-              onTap: () {
+              onTap: () async {
                 // ignore: avoid_print
                 print('Клик на карточку');
                 Navigator.of(context).push(
@@ -68,7 +70,7 @@ class FoodListView extends StatelessWidget {
               width: 50,
             );
           },
-          itemCount: 20),
+          itemCount: foodsByCategory.length),
     );
   }
 }
