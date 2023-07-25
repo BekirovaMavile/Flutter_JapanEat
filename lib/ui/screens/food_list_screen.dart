@@ -20,6 +20,7 @@ class FoodList extends StatefulWidget {
 class FoodListState extends State<FoodList> {
   List<Food> get foodsByCategory => FoodState().foodsByCategory;
   List<FoodCategory> get categories => FoodState().categories;
+  List<Food> get foods => FoodState().foods;
 
   void onCategoryTap(FoodCategory category) async {
     await FoodState().onCategoryTap(category);
@@ -51,8 +52,7 @@ class FoodListState extends State<FoodList> {
             ),
             _categories(),
             FoodListView(
-                foods: AppData.foodItems,
-                foodsByCategory: foodsByCategory,
+                foods: foodsByCategory,
             ),
             Padding(
               padding: const EdgeInsets.only(top: 25, bottom: 5),
@@ -77,9 +77,8 @@ class FoodListState extends State<FoodList> {
               ),
             ),
             FoodListView(
-                foods: AppData.foodItems,
+                foods: foods,
                 isReversed: true,
-                foodsByCategory: foodsByCategory
             ),
           ],
         ),
@@ -139,7 +138,7 @@ class FoodListState extends State<FoodList> {
         child: ListView.separated(
             scrollDirection: Axis.horizontal,
             itemBuilder: (_, index) {
-              final category = AppData.categories[index];
+              final category = categories[index];
               return GestureDetector(
                 onTap: () {
                   onCategoryTap(category);
@@ -165,7 +164,7 @@ class FoodListState extends State<FoodList> {
             separatorBuilder: (_, __) => Container(
               width: 15,
             ),
-            itemCount: AppData.categories.length),
+            itemCount: categories.length),
       ),
     );
   }

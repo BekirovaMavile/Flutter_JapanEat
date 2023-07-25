@@ -25,14 +25,19 @@ class FoodState {
 
   //Действия
   Future<void> onCategoryTap(FoodCategory selectedCategory) async {
+    print('here');
     if (categories.contains(selectedCategory)) {
+      print('here2');
       categories.forEach((category) {
+        print(category == selectedCategory);
         category.isSelected = (category == selectedCategory);
       });
       if (selectedCategory == categories.first) {
         foodsByCategory = foods;
       } else {
+        print('here3');
         foodsByCategory = foods.where((food) => food.type == selectedCategory.type).toList();
+        print(foodsByCategory.length);
       }
     }
   }

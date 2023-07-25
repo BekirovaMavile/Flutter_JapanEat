@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../data/app_data.dart';
+import '../../data/models/food.dart';
 import '../../ui_kit/app_color.dart';
 import '../../ui_kit/app_icon.dart';
 import '../widgets/counter_button.dart';
@@ -8,14 +9,18 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class FoodDetail extends StatefulWidget {
-  const FoodDetail({super.key});
-
+  const FoodDetail({super.key, required this.foods});
+final Food foods;
   @override
   State<FoodDetail> createState() => FoodDetailState();
 }
 
 class FoodDetailState extends State<FoodDetail> {
-  final food = AppData.food;
+  Future<void> onFoodTap(Food foods) async {
+    food = widget.foods;
+  }
+
+  late Food food = widget.foods;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
