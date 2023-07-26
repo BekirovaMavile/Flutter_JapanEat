@@ -18,37 +18,40 @@ class FoodState {
   List<FoodCategory> categories = AppData.categories;
   List<Food> foods = AppData.foodItems;
   List<Food> foodsByCategory = AppData.foodItems;
-  // List<Food> get cart => foods.where((element) => element.cart).toList();
+  List<Food> get cart => foods.where((element) => element.cart).toList();
   List<Food> get favorite => foods.where((element) => element.isFavorite).toList();
   ValueNotifier<bool> isLigth = ValueNotifier(true);
 
 
   //Действия
   Future<void> onCategoryTap(FoodCategory selectedCategory) async {
-    print('here');
     if (categories.contains(selectedCategory)) {
-      print('here2');
       categories.forEach((category) {
-        print(category == selectedCategory);
         category.isSelected = (category == selectedCategory);
       });
       if (selectedCategory == categories.first) {
         foodsByCategory = foods;
       } else {
-        print('here3');
         foodsByCategory = foods.where((food) => food.type == selectedCategory.type).toList();
-        print(foodsByCategory.length);
       }
     }
   }
 
+  Future<void> onIncreaseQuantityTap(Food food) async {
+    food.quantity++;
+  }
+
+  Future<void> onDecreaseQuantityTap(Food food) async {
+    food.quantity--;
+  }
 
 
-  Future<void> onIncreaseQuantityTap(Food food) async {}
+  Future<void> onAddToCartTap(Food food) async {
+    if (!food.cart) {
+      food.cart = true;
+    }
+  }
 
-  Future<void> onDecreaseQuantityTap(Food food) async {}
-
-  Future<void> onAddToCartTap(Food food) async {}
 
   Future<void> onRemoveFromCartTap(Food food) async {}
 
@@ -59,7 +62,11 @@ class FoodState {
   void toggleTheme() {}
 
   //Вспомогательные  методы
-  // String foodPrice(Food food) {}
+  String foodPrice(Food food) {
+    double price = 0;
+    price = food.quantity * food.price;
+    return price.toString();
+  }
   //
   // double get subtotal {}
 }

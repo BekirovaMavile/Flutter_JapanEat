@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_japan_eat/states/food_state.dart';
 import '../screens/profile_screen.dart';
 
 import '../../data/app_data.dart';
@@ -39,13 +40,14 @@ class HomeScreenState extends State<HomeScreen> {
     );
 
   }
-  final List<Widget> screens = [const FoodList(), const CartScreen(), const FavoriteScreen(), const ProfileScreen()];
+  final List<Widget> screens = [const FoodList(), CartScreen(key: FoodState().cartKey,), const FavoriteScreen(), const ProfileScreen()];
   int currentIndex = 0;
 
   void onTabTap(int index) {
     if (currentIndex == index) return;
     currentIndex = index;
     setState(() {});
+    if (index == 1) FoodState().cartKey.currentState?.update();
   }
 
 }

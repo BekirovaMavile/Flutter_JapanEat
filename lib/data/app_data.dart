@@ -30,6 +30,7 @@ class AppData {
       5.0,
       FoodType.sushi,
       150,
+        false
     ),
     Food(
       2,
@@ -42,6 +43,7 @@ class AppData {
       3.5,
       FoodType.sushi,
       652,
+        false
     ),
     Food(
       3,
@@ -54,6 +56,7 @@ class AppData {
       4.0,
       FoodType.sushi,
       723,
+        false
     ),
     Food(
       4,
@@ -66,6 +69,7 @@ class AppData {
       2.5,
       FoodType.kebab,
       456,
+        false
     ),
     Food(
       5,
@@ -78,6 +82,7 @@ class AppData {
       4.5,
       FoodType.kebab,
       650,
+        false
     ),
     Food(
       6,
@@ -90,6 +95,7 @@ class AppData {
       1.5,
       FoodType.burger,
       350,
+        false
     ),
     Food(
       7,
@@ -102,6 +108,7 @@ class AppData {
       3.5,
       FoodType.burger,
       265,
+        false
     ),
     Food(
       8,
@@ -114,6 +121,7 @@ class AppData {
       4.0,
       FoodType.ramen,
       890,
+        false
     ),
     Food(
       9,
@@ -126,6 +134,7 @@ class AppData {
       5.0,
       FoodType.ramen,
       900,
+        false
     ),
     Food(
       10,
@@ -138,6 +147,7 @@ class AppData {
       3.5,
       FoodType.ramen,
       420,
+        false
     ),
     Food(
       11,
@@ -150,6 +160,7 @@ class AppData {
       3.0,
       FoodType.tempura,
       263,
+        false
     ),
     Food(
       12,
@@ -162,6 +173,7 @@ class AppData {
       5.0,
       FoodType.tempura,
       560,
+        false
     ),
   ];
 
@@ -211,6 +223,7 @@ class AppData {
       3.5,
       FoodType.ramen,
       420,
+        false
     ),
     Food(
       11,
@@ -223,6 +236,7 @@ class AppData {
       3.0,
       FoodType.tempura,
       263,
+        false
     ),
     Food(
       12,
@@ -235,6 +249,7 @@ class AppData {
       5.0,
       FoodType.tempura,
       560,
+        false
     ),
   ];
 
@@ -251,6 +266,7 @@ class AppData {
       4.5,
       FoodType.kebab,
       650,
+        false
     ),
     Food(
       6,
@@ -263,6 +279,7 @@ class AppData {
       1.5,
       FoodType.burger,
       350,
+        false
     ),
     Food(
       7,
@@ -275,6 +292,7 @@ class AppData {
       3.5,
       FoodType.burger,
       265,
+        false
     ),
     Food(
       8,
@@ -287,6 +305,7 @@ class AppData {
       4.0,
       FoodType.ramen,
       890,
+        false
     ),
   ];
 
@@ -302,6 +321,7 @@ class AppData {
     5.0,
     FoodType.tempura,
     560,
+      false
   );
 }
 

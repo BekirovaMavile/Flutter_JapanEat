@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-
-import '../../data/app_data.dart';
 import '../../data/models/food.dart';
+import '../../states/food_state.dart';
 import '../../ui_kit/app_color.dart';
 import '../../ui_kit/app_icon.dart';
 import '../widgets/counter_button.dart';
@@ -10,17 +9,31 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class FoodDetail extends StatefulWidget {
   const FoodDetail({super.key, required this.foods});
-final Food foods;
+  final Food foods;
   @override
   State<FoodDetail> createState() => FoodDetailState();
 }
 
 class FoodDetailState extends State<FoodDetail> {
-  Future<void> onFoodTap(Food foods) async {
-    food = widget.foods;
-  }
 
   late Food food = widget.foods;
+
+  void onIncrementTap() async{
+    await FoodState().onIncreaseQuantityTap(food);
+    setState(() {
+    });
+  }
+
+  void onDecrementTap() async{
+    await FoodState().onDecreaseQuantityTap(food);
+    setState(() {
+    });
+  }
+
+  void onAddToCart() async {
+    await FoodState().onAddToCartTap(food);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -122,8 +135,8 @@ class FoodDetailState extends State<FoodDetail> {
                                     ?.copyWith(color: LightThemeColor.accent),
                               ),
                               CounterButton(
-                                onIncrementTap: (){},
-                                onDecrementTap: (){},
+                                onIncrementTap: onIncrementTap,
+                                onDecrementTap: onDecrementTap,
                                 label: Text(
                                   food.quantity.toString(),
                                   style: Theme.of(context).textTheme.displayLarge,
@@ -148,7 +161,7 @@ class FoodDetailState extends State<FoodDetail> {
                             child: Padding(
                               padding: const EdgeInsets.symmetric(horizontal: 30),
                               child: ElevatedButton(
-                                onPressed: (){},
+                                onPressed: onAddToCart,
                                 child: const Text("Add to cart"),
                               ),
                             ),

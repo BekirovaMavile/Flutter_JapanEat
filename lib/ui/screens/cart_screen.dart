@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_japan_eat/states/food_state.dart';
+import '../../data/models/food.dart';
 import '../widgets/empty_wrapper.dart';
 import '../../data/app_data.dart';
 import '../../ui_kit/app_color.dart';
@@ -14,6 +16,12 @@ class CartScreen extends StatefulWidget {
 
 class CartScreenState extends State<CartScreen> {
   var cartFood = AppData.cartItems;
+  List<Food> get cart => FoodState().cart;
+
+
+  void update() {
+    setState(() {});
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,10 +29,10 @@ class CartScreenState extends State<CartScreen> {
       // body:  _cartListView(),
       body: EmptyWrapper(
         title: "Empty cart",
-        isEmpty: cartFood.isEmpty,
+        isEmpty: cart.isEmpty,
         child: _cartListView(),
       ),
-      bottomNavigationBar: cartFood.isEmpty? const SizedBox() : _bottomAppBar(),
+      bottomNavigationBar: cart.isEmpty? const SizedBox() : _bottomAppBar(),
     );
   }
   PreferredSizeWidget _appBar(BuildContext context) {
@@ -39,8 +47,9 @@ class CartScreenState extends State<CartScreen> {
   Widget _cartListView() {
     return ListView.separated(
       padding: const EdgeInsets.all(30),
-      itemCount: cartFood.length,
+      itemCount: cart.length,
       itemBuilder: (_, index) {
+        final food = FoodState().cart[index];
         return Container(
           width: double.infinity,
           padding: const EdgeInsets.all(5),
@@ -52,18 +61,18 @@ class CartScreenState extends State<CartScreen> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               const SizedBox(width: 20),
-              Image.asset(cartFood[index].image, scale: 10),
+              Image.asset(food.image, scale: 10),
               const SizedBox(width: 20),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    cartFood[index].name,
+                    food.name,
                     style: Theme.of(context).textTheme.displayMedium,
                   ),
                   const SizedBox(height: 5),
                   Text(
-                    "\$${cartFood[index].price}",
+                    "\$${food.price}",
                     style: Theme.of(context).textTheme.headlineSmall,
                   ),
                 ],
@@ -83,12 +92,12 @@ class CartScreenState extends State<CartScreen> {
                     size: const Size(24, 24),
                     padding: 0,
                     label: Text(
-                      cartFood[index].quantity.toString(),
+                      food.quantity.toString(),
                       style: Theme.of(context).textTheme.displayMedium,
                     ),
                   ),
                   Text(
-                    "\$10",
+                    "\$${FoodState().foodPrice(food)}",
                     style: AppTextStyle.h2Style.copyWith(color:
                     LightThemeColor.accent),
                   )

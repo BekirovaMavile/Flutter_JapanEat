@@ -11,6 +11,7 @@ class Food {
   double score;
   FoodType type;
   int voter;
+  bool cart;
 
   Food(
       this.id,
@@ -23,5 +24,6 @@ class Food {
       this.score,
       this.type,
       this.voter,
+      this.cart,
       );
 }
