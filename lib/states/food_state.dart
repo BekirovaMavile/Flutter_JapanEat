@@ -20,7 +20,7 @@ class FoodState {
   List<Food> foodsByCategory = AppData.foodItems;
   List<Food> get cart => foods.where((element) => element.cart).toList();
   List<Food> get favorite => foods.where((element) => element.isFavorite).toList();
-  ValueNotifier<bool> isLigth = ValueNotifier(true);
+  ValueNotifier<bool> isLight = ValueNotifier(true);
 
 
   //Действия
@@ -42,6 +42,7 @@ class FoodState {
   }
 
   Future<void> onDecreaseQuantityTap(Food food) async {
+    if (food.quantity == 1) return;
     food.quantity--;
   }
 
@@ -53,13 +54,28 @@ class FoodState {
   }
 
 
-  Future<void> onRemoveFromCartTap(Food food) async {}
+  Future<void> onRemoveFromCartTap(Food food) async {
+    food.cart = false;
+  }
 
-  Future<void> onCheckOutTap() async {}
+  Future<void> onCheckOutTap() async {
+    for (var food in foods) {
+      food.cart = false;
+    }
+  }
 
-  Future<void> onAddRemoveFavoriteTap(Food food) async{}
+  Future<void> onAddRemoveFavoriteTap(Food food) async{
+    if (favorite.contains(food)) {
+    favorite.remove(food);
+  } else {
+    favorite.add(food);
+  }
+    food.isFavorite = !food.isFavorite;
+  }
 
-  void toggleTheme() {}
+  void toggleTheme() {
+    isLight.value = !isLight.value;
+  }
 
   //Вспомогательные  методы
   String foodPrice(Food food) {
@@ -67,6 +83,12 @@ class FoodState {
     price = food.quantity * food.price;
     return price.toString();
   }
-  //
-  // double get subtotal {}
+
+  double get subtotal {
+    double subtotal = 0;
+    for(var food in cart) {
+      subtotal += food.quantity * food.price;
+    }
+    return subtotal;
+  }
 }

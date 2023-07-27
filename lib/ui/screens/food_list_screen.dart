@@ -89,7 +89,7 @@ class FoodListState extends State<FoodList> {
     return AppBar(
       leading: IconButton(
         icon: const FaIcon(FontAwesomeIcons.dice),
-        onPressed: () {},
+        onPressed: () => FoodState().toggleTheme(),
       ),
       title: Row(
         mainAxisAlignment: MainAxisAlignment.center,

@@ -40,7 +40,7 @@ class HomeScreenState extends State<HomeScreen> {
     );
 
   }
-  final List<Widget> screens = [const FoodList(), CartScreen(key: FoodState().cartKey,), const FavoriteScreen(), const ProfileScreen()];
+  final List<Widget> screens = [const FoodList(), CartScreen(key: FoodState().cartKey,),  FavoriteScreen(key: FoodState().favoriteKey,), const ProfileScreen()];
   int currentIndex = 0;
 
   void onTabTap(int index) {
@@ -48,6 +48,7 @@ class HomeScreenState extends State<HomeScreen> {
     currentIndex = index;
     setState(() {});
     if (index == 1) FoodState().cartKey.currentState?.update();
+    if (index == 2) FoodState().favoriteKey.currentState?.update();
   }
 
 }
