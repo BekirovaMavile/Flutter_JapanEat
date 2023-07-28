@@ -31,7 +31,7 @@ class FoodListView extends StatelessWidget {
                 print('Клик на карточку');
                 Navigator.of(context).push(
                   MaterialPageRoute(
-                      builder: (_) => FoodDetail(foods: food,)
+                      builder: (_) => FoodDetail(food: food,)
                   ),
                 );
               },

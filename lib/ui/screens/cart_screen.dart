@@ -20,6 +20,7 @@ class CartScreenState extends State<CartScreen> {
   // var cartFood = AppData.cartItems;
   List<Food> get cart => FoodState().cart;
   double get subtotal => FoodState().subtotal;
+  double taxes = 5.0;
 
   void update() {
     setState(() {});
@@ -45,7 +46,6 @@ class CartScreenState extends State<CartScreen> {
   void onCheckOutTap() async {
     await FoodState().onCheckOutTap();
     setState(() {
-      cart.isEmpty;
     });
   }
 
@@ -208,7 +208,7 @@ class CartScreenState extends State<CartScreen> {
                                 Theme.of(context).textTheme.headlineSmall,
                               ),
                               Text(
-                                "\$${5.00}",
+                                "\$${taxes}",
                                 style:
                                 Theme.of(context).textTheme.displayMedium,
                               ),
@@ -233,7 +233,7 @@ class CartScreenState extends State<CartScreen> {
                                 Theme.of(context).textTheme.displayMedium,
                               ),
                               Text(
-                                "\$${(subtotal + 5.0).toString()}",
+                                "\$${(subtotal + taxes).toString()}",
                                 style:
                                 AppTextStyle.h2Style.copyWith(color: LightThemeColor.accent,),
                               ),

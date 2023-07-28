@@ -321,7 +321,7 @@ class AppData {
     5.0,
     FoodType.tempura,
     560,
-      false
+    false
   );
 }
 

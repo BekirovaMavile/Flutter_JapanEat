@@ -8,15 +8,15 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class FoodDetail extends StatefulWidget {
-  const FoodDetail({super.key, required this.foods});
-  final Food foods;
+  const FoodDetail({super.key, required this.food});
+  final Food food;
   @override
   State<FoodDetail> createState() => FoodDetailState();
 }
 
 class FoodDetailState extends State<FoodDetail> {
 
-  late Food food = widget.foods;
+  late Food food = widget.food;
 
   void onIncrementTap() async{
     await FoodState().onIncreaseQuantityTap(food);
