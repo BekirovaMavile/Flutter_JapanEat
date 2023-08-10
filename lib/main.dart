@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_japan_eat/states/category/category_bloc.dart';
 import 'package:flutter_japan_eat/ui/screens/cart_screen.dart';
 import 'package:flutter_japan_eat/ui/screens/favorite_screen.dart';
 import 'package:flutter_japan_eat/ui/screens/food_detail_screen.dart';
@@ -6,6 +7,9 @@ import 'package:flutter_japan_eat/ui/screens/home_screen.dart';
 import 'package:flutter_japan_eat/ui/screens/profile_screen.dart';
 import 'package:flutter_japan_eat/ui_kit/_ui_kit.dart';
 import 'package:flutter_japan_eat/ui/screens/food_list_screen.dart';
+
+import 'states/logic_bloc/logic_bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 void main() {
   runApp(const MyApp());
@@ -17,10 +21,20 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Japan Eat',
-      theme: AppTheme.lightTheme,
-      home: const HomeScreen(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => FoodBloc(),
+        ),
+        BlocProvider(
+          create: (context) => CategoryBloc(),
+        ),
+      ],
+      child: MaterialApp(
+        title: 'Japan Eat',
+        theme: AppTheme.lightTheme,
+        home: const HomeScreen(),
+      ),
     );
   }
 }
@@ -62,8 +76,10 @@ class _MyHomePageState extends State<MyHomePage> {
               style: Theme.of(context).textTheme.headlineMedium,
             ),
             Image.asset(AppAsset.profileImage),
-            Icon(AppIcon.heart,
-            color: Theme.of(context).indicatorColor,)
+            Icon(
+              AppIcon.heart,
+              color: Theme.of(context).indicatorColor,
+            )
           ],
         ),
       ),

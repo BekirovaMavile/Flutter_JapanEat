@@ -68,7 +68,7 @@ class FoodListView extends StatelessWidget {
               width: 50,
             );
           },
-          itemCount: 20),
+          itemCount: foods.length),
     );
   }
 }

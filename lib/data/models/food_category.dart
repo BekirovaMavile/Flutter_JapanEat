@@ -7,4 +7,10 @@ class FoodCategory {
   bool isSelected;
 
   FoodCategory(this.type, this.isSelected);
+  FoodCategory copyWith({FoodType? type, bool? isSelected}) {
+    return FoodCategory(
+      type ?? this.type,
+      isSelected ?? this.isSelected,
+    );
+  }
 }
