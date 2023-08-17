@@ -35,4 +35,5 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
       emit(CategoryState(foods: foods, foodCategories: categories));
     }
   }
+
 }

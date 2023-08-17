@@ -23,12 +23,12 @@ class HomeScreenState extends State<HomeScreen> {
   ];
 
   void onTabTap(int index) {
-    context.read<FoodBloc>().add(TabTap(index));
+    context.read<LogicBloc>().add(TabTap(index));
   }
 
   @override
   Widget build(BuildContext context) {
-    final logicTab = context.watch<FoodBloc>().state.currentIndex;
+    final logicTab = context.watch<LogicBloc>().state.currentIndex;
     return Scaffold(
         body: SafeArea(
               child: IndexedStack(

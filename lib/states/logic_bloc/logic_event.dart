@@ -1,9 +1,9 @@
 part of 'logic_bloc.dart';
 
 @immutable
-abstract class FoodEvent {}
+abstract class LogicEvent {}
 
-class TabTap extends FoodEvent {
+class TabTap extends LogicEvent {
   final int index;
 
   TabTap(this.index);

@@ -1,11 +1,11 @@
 part of 'logic_bloc.dart';
 @immutable
-class FoodState {
+class LogicState {
   final int currentIndex;
 
-  FoodState(this.currentIndex);
+  LogicState(this.currentIndex);
 }
 
-class FoodInitial extends FoodState {
-  FoodInitial(super.currentIndex);
+class LogicInitial extends LogicState {
+  LogicInitial(super.currentIndex);
 }

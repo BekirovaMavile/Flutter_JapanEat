@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-
+import 'package:flutter_japan_eat/data/models/food.dart';
+import 'package:flutter_japan_eat/states/food/food_bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../data/app_data.dart';
 import '../../ui_kit/app_color.dart';
 import '../../ui_kit/app_icon.dart';
@@ -8,16 +10,20 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class FoodDetail extends StatefulWidget {
-  const FoodDetail({super.key});
+  const FoodDetail({super.key, required this.food});
+
+  final Food food;
 
   @override
   State<FoodDetail> createState() => FoodDetailState();
 }
 
 class FoodDetailState extends State<FoodDetail> {
-  final food = AppData.food;
+  late Food food = widget.food;
+
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
         appBar: _appBar(context),
         body: Center(child: Image.asset(food.image, scale: 2)),
@@ -66,7 +72,9 @@ class FoodDetailState extends State<FoodDetail> {
             child: SizedBox(
                 height: 300,
                 child: Container(
-                  color: Theme.of(context).brightness == Brightness.dark ? DarkThemeColor.primaryLight : Colors.white,
+                  color: Theme.of(context).brightness == Brightness.dark
+                      ? DarkThemeColor.primaryLight
+                      : Colors.white,
                   child: Padding(
                     padding: const EdgeInsets.all(30),
                     child: SingleChildScrollView(
@@ -116,13 +124,31 @@ class FoodDetailState extends State<FoodDetail> {
                                     .displayLarge
                                     ?.copyWith(color: LightThemeColor.accent),
                               ),
-                              CounterButton(
-                                onIncrementTap: (){},
-                                onDecrementTap: (){},
-                                label: Text(
-                                  food.quantity.toString(),
-                                  style: Theme.of(context).textTheme.displayLarge,
-                                ),
+                              BlocBuilder<FoodBloc, FoodState>(
+                                builder: (context, state) {
+                                final int foodIndex = state.foodList.indexWhere((element) => element.id == food.id);
+                                  if (foodIndex != -1) {
+                                    final int quantity = state.foodList[foodIndex].quantity;
+                                    return CounterButton(
+                                      onIncrementTap: () =>
+                                          context
+                                              .read<FoodBloc>()
+                                              .add(IncreaseQuantityEvent(state.foodList[foodIndex])),
+                                      onDecrementTap: () =>
+                                          context
+                                              .read<FoodBloc>()
+                                              .add(DecreaseQuantityEvent(state.foodList[foodIndex])),
+                                      label: Text(
+                                      '$quantity',
+                                        style: Theme
+                                            .of(context)
+                                            .textTheme
+                                            .displayLarge,
+                                      ),
+                                    );
+                                  }
+                                  return const SizedBox.shrink();
+                                },
                               )
                             ],
                           ),
@@ -141,9 +167,12 @@ class FoodDetailState extends State<FoodDetail> {
                             width: double.infinity,
                             height: 45,
                             child: Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 30),
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 30),
                               child: ElevatedButton(
-                                onPressed: (){},
+                                onPressed: ()  => context
+                                    .read<FoodBloc>()
+                                    .add(AddToCartEvent(food)),
                                 child: const Text("Add to cart"),
                               ),
                             ),
@@ -152,9 +181,9 @@ class FoodDetailState extends State<FoodDetail> {
                       ),
                     ),
                   ),
-                ))));
+                ),
+            ),
+        ),
+    );
   }
-
-
-
 }

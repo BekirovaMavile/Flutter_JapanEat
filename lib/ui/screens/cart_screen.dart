@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_japan_eat/data/models/food.dart';
+import 'package:flutter_japan_eat/states/food/food_bloc.dart';
 import '../widgets/empty_wrapper.dart';
 import '../../data/app_data.dart';
 import '../../ui_kit/app_color.dart';
 import '../../ui_kit/app_text_style.dart';
 import '../widgets/counter_button.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CartScreen extends StatefulWidget {
   const CartScreen({super.key});
@@ -13,12 +16,11 @@ class CartScreen extends StatefulWidget {
 }
 
 class CartScreenState extends State<CartScreen> {
-  var cartFood = AppData.cartItems;
   @override
   Widget build(BuildContext context) {
+    final List<Food> cartFood = context.watch<FoodBloc>().getCartList;
     return Scaffold(
       appBar: _appBar(context),
-      // body:  _cartListView(),
       body: EmptyWrapper(
         title: "Empty cart",
         isEmpty: cartFood.isEmpty,
@@ -37,6 +39,7 @@ class CartScreenState extends State<CartScreen> {
   }
 
   Widget _cartListView() {
+    final List<Food> cartFood = context.watch<FoodBloc>().getCartList;
     return ListView.separated(
       padding: const EdgeInsets.all(30),
       itemCount: cartFood.length,

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_japan_eat/states/category/category_bloc.dart';
+import 'package:flutter_japan_eat/states/food/food_bloc.dart';
 import 'package:flutter_japan_eat/ui/screens/cart_screen.dart';
 import 'package:flutter_japan_eat/ui/screens/favorite_screen.dart';
 import 'package:flutter_japan_eat/ui/screens/food_detail_screen.dart';
@@ -23,6 +24,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
+        BlocProvider(
+          create: (context) => LogicBloc(),
+        ),
         BlocProvider(
           create: (context) => FoodBloc(),
         ),
