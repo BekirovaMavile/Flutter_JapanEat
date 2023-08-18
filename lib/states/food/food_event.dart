@@ -26,6 +26,10 @@ class DeleteFromCartEvent extends FoodEvent {
   const DeleteFromCartEvent(Food food) : super(food);
 }
 
+// class CleanCartEvent extends FoodEvent{
+//   const CleanCartEvent(super.food);
+// }
+
 class FavoriteListEvent extends FoodEvent {
   const FavoriteListEvent(Food food) : super(food);
 }

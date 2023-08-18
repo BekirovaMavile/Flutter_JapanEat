@@ -18,14 +18,15 @@ class FoodBloc extends Bloc<FoodEvent, FoodState> {
     on<AddToCartEvent>(_addToCart);
     on<DeleteFromCartEvent>(_deleteFromCart);
     on<FavoriteListEvent>(_isFavorite);
+    // on<CleanCartEvent>(_cleanCart);
   }
 
   _increaseQuantity(IncreaseQuantityEvent event, Emitter<FoodState> emit) {
-    int index = state.foodList.indexWhere((element) => element.id == event.food.id);
+    // int index = state.foodList.indexWhere((element) => element.id == event.food.id);
     final List<Food> foodList = state.foodList.map((element) {
       if (element.id == event.food.id) {
-        return state.foodList[index]
-            .copyWith(quantity: state.foodList[index].quantity + 1);
+        return event.food
+            .copyWith(quantity: event.food.quantity + 1);
       }
       return element;
     }).toList();
@@ -34,11 +35,11 @@ class FoodBloc extends Bloc<FoodEvent, FoodState> {
   }
 
   void _decreaseQuantity(DecreaseQuantityEvent event, Emitter<FoodState> emit) {
-    int index = state.foodList.indexWhere((element) => element.id == event.food.id);
+    // int index = state.foodList.indexWhere((element) => element.id == event.food.id);
     final List<Food> foodList = state.foodList.map((element) {
       if (element.id == event.food.id && element.quantity > 1) {
-        return state.foodList[index]
-            .copyWith(quantity: state.foodList[index].quantity - 1);
+        return event.food
+            .copyWith(quantity: event.food.quantity - 1);
       }
       return element;
     }).toList();
@@ -46,10 +47,10 @@ class FoodBloc extends Bloc<FoodEvent, FoodState> {
   }
 
   void _addToCart(AddToCartEvent event, Emitter<FoodState> emit){
-    int index = state.foodList.indexWhere((element) => element.id == event.food.id);
+    // int index = state.foodList.indexWhere((element) => element.id == event.food.id);
     final List<Food> cartList = state.foodList.map((element) {
       if (element.id == event.food.id) {
-        return state.foodList[index].copyWith(cart:true);
+        return event.food.copyWith(cart:true);
       }
       return element;
     }).toList();
@@ -78,6 +79,13 @@ class FoodBloc extends Bloc<FoodEvent, FoodState> {
     emit(FoodState(foodList: foodList));
   }
 
+  // void _cleanCart(CleanCartEvent event, Emitter<FoodState> emit){
+  //   final List<Food> cartList = state.foodList.map((element) {
+  //       return event.food.copyWith(cart:false);
+  //   }).toList();
+  //   emit(FoodState(foodList: cartList));
+  // }
+
   String priceFood(Food food){
     double price = 0;
     price = food.quantity * food.price;
@@ -94,4 +102,9 @@ class FoodBloc extends Bloc<FoodEvent, FoodState> {
     return subtotal;
   }
 
+
+  int getIndex(Food food) {
+    int index = state.foodList.indexWhere((element) => element.id == food.id);
+    return index;
+  }
 }
