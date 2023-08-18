@@ -22,7 +22,4 @@ class ThemeBloc extends Bloc<ThemeEvent, ThemeState> {
       emit(state.copyWith(theme: AppTheme.lightTheme!));
     }
   }
-
-  bool get isLightTheme =>
-      state.theme == AppTheme.lightTheme ? true : false;
 }
