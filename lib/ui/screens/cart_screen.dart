@@ -7,6 +7,7 @@ import '../../ui_kit/app_color.dart';
 import '../../ui_kit/app_text_style.dart';
 import '../widgets/counter_button.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class CartScreen extends StatefulWidget {
   const CartScreen({super.key});
@@ -16,6 +17,7 @@ class CartScreen extends StatefulWidget {
 }
 
 class CartScreenState extends State<CartScreen> {
+  double total = 5;
   @override
   Widget build(BuildContext context) {
     final List<Food> cartFood = context.watch<FoodBloc>().getCartList;
@@ -44,60 +46,84 @@ class CartScreenState extends State<CartScreen> {
       padding: const EdgeInsets.all(30),
       itemCount: cartFood.length,
       itemBuilder: (_, index) {
-        return Container(
-          width: double.infinity,
-          padding: const EdgeInsets.all(5),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(15),
-            color: Colors.white,
-          ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        return Dismissible(
+          direction: DismissDirection.endToStart,
+          onDismissed: (direction) {
+            if (direction == DismissDirection.endToStart) {
+              context.read<FoodBloc>().add(DeleteFromCartEvent(cartFood[index]));
+            }
+          },
+          key: UniqueKey(),
+          background:Row(
             children: [
-              const SizedBox(width: 20),
-              Image.asset(cartFood[index].image, scale: 10),
-              const SizedBox(width: 20),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    cartFood[index].name,
-                    style: Theme.of(context).textTheme.displayMedium,
-                  ),
-                  const SizedBox(height: 5),
-                  Text(
-                    "\$${cartFood[index].price}",
-                    style: Theme.of(context).textTheme.headlineSmall,
-                  ),
-                ],
+              Container(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 15,
+                  vertical: 25,
+                ),
+                decoration: BoxDecoration(
+                  color: Colors.redAccent,
+                  borderRadius: BorderRadius.circular(15),
+                ),
+                child: const FaIcon(FontAwesomeIcons.trash),
               ),
-              const Spacer(),
-              Column(
-                children: [
-                  CounterButton(
-                    onIncrementTap: () {
-                      // ignore: avoid_print
-                      print('Нажали на увеличение количества');
-                    },
-                    onDecrementTap: () {
-                      // ignore: avoid_print
-                      print('Нажали на уменьшение количества');
-                    },
-                    size: const Size(24, 24),
-                    padding: 0,
-                    label: Text(
-                      cartFood[index].quantity.toString(),
+            ],
+          ),
+          child: Container(
+            width: double.infinity,
+            padding: const EdgeInsets.all(5),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(15),
+              color: Colors.white,
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                const SizedBox(width: 20),
+                Image.asset(cartFood[index].image, scale: 10),
+                const SizedBox(width: 20),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      cartFood[index].name,
                       style: Theme.of(context).textTheme.displayMedium,
                     ),
-                  ),
-                  Text(
-                    "\$10",
-                    style: AppTextStyle.h2Style.copyWith(color:
-                    LightThemeColor.accent),
-                  )
-                ],
-              )
-            ],
+                    const SizedBox(height: 5),
+                    Text(
+                      "\$${cartFood[index].price}",
+                      style: Theme.of(context).textTheme.headlineSmall,
+                    ),
+                  ],
+                ),
+                const Spacer(),
+                Column(
+                  children: [
+                    CounterButton(
+                      onIncrementTap: () =>
+                          context
+                              .read<FoodBloc>()
+                              .add(IncreaseQuantityEvent(cartFood[index])),
+                      onDecrementTap: () =>
+                          context
+                              .read<FoodBloc>()
+                              .add(DecreaseQuantityEvent(cartFood[index])),
+                      size: const Size(24, 24),
+                      padding: 0,
+                      label: Text(
+                        cartFood[index].quantity.toString(),
+                        style: Theme.of(context).textTheme.displayMedium,
+                      ),
+                    ),
+                    Text(
+                      "\$${context.read<FoodBloc>().priceFood(cartFood[index])}",
+                      style: AppTextStyle.h2Style.copyWith(color:
+                      LightThemeColor.accent),
+                    )
+                  ],
+                )
+              ],
+            ),
           ),
         );
       },
@@ -108,6 +134,7 @@ class CartScreenState extends State<CartScreen> {
   }
 
   Widget _bottomAppBar() {
+    final List<Food> cartFood = context.watch<FoodBloc>().getCartList;
     return ClipRRect(
       borderRadius: const BorderRadius.only(
         topLeft: Radius.circular(30),
@@ -117,7 +144,7 @@ class CartScreenState extends State<CartScreen> {
           child: SizedBox(
               height: 250,
               child: Container(
-                color: Theme.of(context).brightness == Brightness.dark ? 					DarkThemeColor.primaryLight : Colors.white,
+                color: Theme.of(context).brightness == Brightness.dark ? DarkThemeColor.primaryLight : Colors.white,
                 child: Padding(
                   padding: const EdgeInsets.all(30),
                   child: SingleChildScrollView(
@@ -136,7 +163,7 @@ class CartScreenState extends State<CartScreen> {
                                 Theme.of(context).textTheme.headlineSmall,
                               ),
                               Text(
-                                "\$111",
+                                "\$${context.read<FoodBloc>().subtotalPrice}",
                                 style:
                                 Theme.of(context).textTheme.displayMedium,
                               ),
@@ -148,7 +175,7 @@ class CartScreenState extends State<CartScreen> {
                           padding: const
                           EdgeInsets.symmetric(horizontal: 20),
                           child: Row(
-                            mainAxisAlignment: 									MainAxisAlignment.spaceBetween,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
                                 "Taxes",
@@ -164,7 +191,7 @@ class CartScreenState extends State<CartScreen> {
                           ),
                         ),
                         const Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 						           20),
+                          padding: EdgeInsets.symmetric(horizontal: 20),
                           child: Divider(thickness: 4.0, height:
                           30.0),
                         ),
@@ -181,7 +208,7 @@ class CartScreenState extends State<CartScreen> {
                                 Theme.of(context).textTheme.displayMedium,
                               ),
                               Text(
-                                "\$120.0",
+                                "\$${total + context.read<FoodBloc>().subtotalPrice}",
                                 style:
                                 AppTextStyle.h2Style.copyWith(color: LightThemeColor.accent,),
                               ),
@@ -196,7 +223,11 @@ class CartScreenState extends State<CartScreen> {
                             padding: const
                             EdgeInsets.symmetric(horizontal: 30),
                             child: ElevatedButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                for (final food in cartFood) {
+                                  context.read<FoodBloc>().add(DeleteFromCartEvent(food));
+                                }
+                              },
                               child: const
                               Text("Checkout"),
                             ),

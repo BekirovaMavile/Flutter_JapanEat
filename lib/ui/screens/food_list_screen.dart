@@ -3,6 +3,7 @@ import 'package:flutter/material.dart' hide Badge;
 import 'package:flutter_japan_eat/data/models/food.dart';
 import 'package:flutter_japan_eat/data/models/food_category.dart';
 import 'package:flutter_japan_eat/states/category/category_bloc.dart';
+import 'package:flutter_japan_eat/states/theme/theme_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../../ui_kit/_ui_kit.dart';
 import '../../data/app_data.dart';
@@ -79,7 +80,7 @@ class FoodListState extends State<FoodList> {
     return AppBar(
       leading: IconButton(
         icon: const FaIcon(FontAwesomeIcons.dice),
-        onPressed: () {},
+        onPressed: () => context.read<ThemeBloc>().add(const ThemeEvent()),
       ),
       title: Row(
         mainAxisAlignment: MainAxisAlignment.center,

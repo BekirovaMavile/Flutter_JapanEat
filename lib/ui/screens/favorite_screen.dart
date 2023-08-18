@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_japan_eat/states/food/food_bloc.dart';
 import '../../data/app_data.dart';
 import '../../data/models/food.dart';
 import '../../ui_kit/app_color.dart';
@@ -14,9 +15,10 @@ class FavoriteScreen extends StatefulWidget {
 }
 
 class FavoriteScreenState extends State<FavoriteScreen> {
-  var favoriteFood = AppData.favoriteItems;
+  // var favoriteFood = AppData.favoriteItems;
   @override
   Widget build(BuildContext context) {
+    final favoriteFood = context.watch<FoodBloc>().isFavorite;
     return Scaffold(
       appBar: _appBar(context),
       // body: _favoriteListView(),
@@ -38,6 +40,7 @@ class FavoriteScreenState extends State<FavoriteScreen> {
   }
 
   Widget _favoriteListView() {
+    final favoriteFood = context.watch<FoodBloc>().isFavorite;
     return ListView.separated(
       padding: const EdgeInsets.all(30),
       itemCount: favoriteFood.length,

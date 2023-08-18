@@ -52,11 +52,17 @@ class FoodDetailState extends State<FoodDetail> {
   }
 
   Widget _floatingActionButton() {
+    final List<Food> foodList = context.watch<FoodBloc>().state.foodList;
+    final foodIndex = foodList.indexWhere((element) => element.id == food.id);
     return FloatingActionButton(
       elevation: 0.0,
       backgroundColor: LightThemeColor.accent,
-      onPressed: () {},
-      child: food.isFavorite
+      onPressed: () {
+        if (foodIndex != -1) {
+          context.read<FoodBloc>().add(FavoriteListEvent(foodList[foodIndex]));
+        }
+      },
+      child: foodIndex != -1 && foodList[foodIndex].isFavorite
           ? const Icon(AppIcon.heart)
           : const Icon(AppIcon.outlinedHeart),
     );
