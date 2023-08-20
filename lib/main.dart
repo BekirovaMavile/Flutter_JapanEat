@@ -10,7 +10,7 @@ import 'package:flutter_japan_eat/ui/screens/profile_screen.dart';
 import 'package:flutter_japan_eat/ui_kit/_ui_kit.dart';
 import 'package:flutter_japan_eat/ui/screens/food_list_screen.dart';
 
-import 'states/logic_bloc/logic_bloc.dart';
+import 'package:flutter_japan_eat/states/tab_navigation/tab_cubit.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 void main() {
@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (context) => LogicBloc(),
+          create: (context) => LogicCubit(),
         ),
         BlocProvider(
           create: (context) => FoodBloc(),

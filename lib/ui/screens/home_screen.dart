@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_japan_eat/states/logic_bloc/logic_bloc.dart';
+import 'package:flutter_japan_eat/states/tab_navigation/tab_cubit.dart';
 import '../screens/profile_screen.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../data/app_data.dart';
@@ -23,12 +23,12 @@ class HomeScreenState extends State<HomeScreen> {
   ];
 
   void onTabTap(int index) {
-    context.read<LogicBloc>().add(TabTap(index));
+    context.read<LogicCubit>().onTabTap(index);
   }
 
   @override
   Widget build(BuildContext context) {
-    final logicTab = context.watch<LogicBloc>().state.currentIndex;
+    final logicTab = context.watch<LogicCubit>().state.currentIndex;
     return Scaffold(
         body: SafeArea(
               child: IndexedStack(
@@ -40,7 +40,7 @@ class HomeScreenState extends State<HomeScreen> {
         // ),
         bottomNavigationBar: BottomNavigationBar(
               currentIndex: logicTab,
-              onTap: onTabTap,
+              onTap: (index) => onTabTap(index),
               selectedFontSize: 0,
               items: AppData.bottomNavigationItems.map(
                 (element) {
