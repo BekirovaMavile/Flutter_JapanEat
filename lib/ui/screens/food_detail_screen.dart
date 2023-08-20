@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_japan_eat/data/models/food.dart';
-import 'package:flutter_japan_eat/states/food/food_bloc.dart';
+import 'package:flutter_japan_eat/states/food/food_cubit.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../data/app_data.dart';
 import '../../ui_kit/app_color.dart';
@@ -52,14 +52,14 @@ class FoodDetailState extends State<FoodDetail> {
   }
 
   Widget _floatingActionButton() {
-    final List<Food> foodList = context.watch<FoodBloc>().state.foodList;
+    final List<Food> foodList = context.watch<FoodCubit>().state.foodList;
     final foodIndex = foodList.indexWhere((element) => element.id == food.id);
     return FloatingActionButton(
       elevation: 0.0,
       backgroundColor: LightThemeColor.accent,
       onPressed: () {
         if (foodIndex != -1) {
-          context.read<FoodBloc>().add(FavoriteListEvent(foodList[foodIndex]));
+          context.read<FoodCubit>().isFavoriteTab(foodList[foodIndex]);
         }
       },
       child: foodIndex != -1 && foodList[foodIndex].isFavorite
@@ -130,7 +130,7 @@ class FoodDetailState extends State<FoodDetail> {
                                     .displayLarge
                                     ?.copyWith(color: LightThemeColor.accent),
                               ),
-                              BlocBuilder<FoodBloc, FoodState>(
+                              BlocBuilder<FoodCubit, FoodState>(
                                 builder: (context, state) {
                                 final int foodIndex = state.foodList.indexWhere((element) => element.id == food.id);
                                   if (foodIndex != -1) {
@@ -138,12 +138,12 @@ class FoodDetailState extends State<FoodDetail> {
                                     return CounterButton(
                                       onIncrementTap: () =>
                                           context
-                                              .read<FoodBloc>()
-                                              .add(IncreaseQuantityEvent(state.foodList[foodIndex])),
+                                              .read<FoodCubit>()
+                                              .increaseQuantity(state.foodList[foodIndex]),
                                       onDecrementTap: () =>
                                           context
-                                              .read<FoodBloc>()
-                                              .add(DecreaseQuantityEvent(state.foodList[foodIndex])),
+                                              .read<FoodCubit>()
+                                              .decreaseQuantity(state.foodList[foodIndex]),
                                       label: Text(
                                       '$quantity',
                                         style: Theme
@@ -177,8 +177,8 @@ class FoodDetailState extends State<FoodDetail> {
                                   const EdgeInsets.symmetric(horizontal: 30),
                               child: ElevatedButton(
                                 onPressed: ()  => context
-                                    .read<FoodBloc>()
-                                    .add(AddToCartEvent(food)),
+                                    .read<FoodCubit>()
+                                    .addToCart(food),
                                 child: const Text("Add to cart"),
                               ),
                             ),

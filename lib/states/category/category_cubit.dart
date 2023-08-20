@@ -6,31 +6,27 @@ import 'package:flutter_japan_eat/data/models/food.dart';
 import 'package:flutter_japan_eat/data/models/food_category.dart';
 import 'package:meta/meta.dart';
 
-part 'category_event.dart';
-
 part 'category_state.dart';
 
-class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
-  CategoryBloc()
+class CategoryCubit extends Cubit<CategoryState> {
+  CategoryCubit()
       : super(CategoryState.initial(AppData.foodItems, AppData.categories),
-  ) {
-    on<CategoryTap>(_onCategoryTab);
-  }
+  );
 
-  _onCategoryTab(CategoryEvent event, Emitter<CategoryState> emit) {
+  onCategoryTab(FoodCategory category) {
     final List<FoodCategory> categories = state.foodCategories.map((element){
-      if (element == event.category) {
-        return event.category.copyWith(isSelected: true);
+      if (element == category) {
+        return category.copyWith(isSelected: true);
       }
       return element.copyWith(isSelected: false);
     }).toList();
 
-    if (event.category.type == FoodType.all) {
+    if (category.type == FoodType.all) {
       emit(CategoryState(
           foodCategories: categories, foods: AppData.foodItems));
     } else {
       final List<Food> foods = AppData.foodItems
-          .where((item) => item.type == event.category.type)
+          .where((item) => item.type == category.type)
           .toList();
       emit(CategoryState(foods: foods, foodCategories: categories));
     }

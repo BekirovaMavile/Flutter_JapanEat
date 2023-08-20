@@ -7,15 +7,12 @@ import 'package:meta/meta.dart';
 import '../../ui_kit/_ui_kit.dart';
 // import 'package:flutter_japan_eat/ui_kit/_ui_kit';
 
-part 'theme_event.dart';
 part 'theme_state.dart';
 
-class ThemeBloc extends Bloc<ThemeEvent, ThemeState> {
-  ThemeBloc() : super(ThemeState.initial()) {
-    on<ThemeEvent>(_switchTheme);
-  }
+class ThemeCubit extends Cubit<ThemeState> {
+  ThemeCubit() : super(ThemeState.initial());
 
-  void _switchTheme(ThemeEvent event, Emitter<ThemeState> emit) {
+  switchTheme() {
     if (state.theme == AppTheme.lightTheme) {
       emit(state.copyWith(theme: AppTheme.darkTheme!));
     } else {

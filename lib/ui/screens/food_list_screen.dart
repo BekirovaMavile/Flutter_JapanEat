@@ -2,7 +2,7 @@ import 'package:badges/badges.dart';
 import 'package:flutter/material.dart' hide Badge;
 import 'package:flutter_japan_eat/data/models/food.dart';
 import 'package:flutter_japan_eat/data/models/food_category.dart';
-import 'package:flutter_japan_eat/states/category/category_bloc.dart';
+import 'package:flutter_japan_eat/states/category/category_cubit.dart';
 import 'package:flutter_japan_eat/states/theme/theme_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../../ui_kit/_ui_kit.dart';
@@ -21,8 +21,8 @@ class FoodList extends StatefulWidget {
 class FoodListState extends State<FoodList> {
   @override
   Widget build(BuildContext context) {
-    final List<Food> foodList = context.select((CategoryBloc bloc) => bloc.state.foods);
-    final List<Food> filteredFood = context.select((CategoryBloc bloc) => bloc.state.foods);
+    final List<Food> foodList = context.watch<CategoryCubit>().state.foods;
+    final List<Food> filteredFood = context.watch<CategoryCubit>().state.foods;
     return Scaffold(
       appBar: _appBar(context),
       body: Padding(
@@ -80,7 +80,7 @@ class FoodListState extends State<FoodList> {
     return AppBar(
       leading: IconButton(
         icon: const FaIcon(FontAwesomeIcons.dice),
-        onPressed: () => context.read<ThemeBloc>().add(const ThemeEvent()),
+        onPressed: () => context.read<ThemeCubit>().switchTheme(),
       ),
       title: Row(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -122,7 +122,7 @@ class FoodListState extends State<FoodList> {
   }
 
 Widget _categories() {
-  final List<FoodCategory> categories = context.select((CategoryBloc bloc) => bloc.state.foodCategories);
+  final List<FoodCategory> categories = context.watch<CategoryCubit>().state.foodCategories;
   return Padding(
     padding: const EdgeInsets.only(top: 8.0),
     child: SizedBox(
@@ -133,8 +133,8 @@ Widget _categories() {
             final category = categories[index];
             return GestureDetector(
               onTap: () => context
-                  .read<CategoryBloc>()
-                  .add(CategoryTap(category: category)),
+                  .read<CategoryCubit>()
+                  .onCategoryTab(category),
               child: Container(
                 width: 100,
                 alignment: Alignment.center,

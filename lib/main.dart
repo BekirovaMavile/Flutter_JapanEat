@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_japan_eat/states/category/category_bloc.dart';
-import 'package:flutter_japan_eat/states/food/food_bloc.dart';
+import 'package:flutter_japan_eat/states/category/category_cubit.dart';
+import 'package:flutter_japan_eat/states/food/food_cubit.dart';
 import 'package:flutter_japan_eat/states/theme/theme_bloc.dart';
 import 'package:flutter_japan_eat/ui/screens/cart_screen.dart';
 import 'package:flutter_japan_eat/ui/screens/favorite_screen.dart';
@@ -29,16 +29,16 @@ class MyApp extends StatelessWidget {
           create: (context) => LogicCubit(),
         ),
         BlocProvider(
-          create: (context) => FoodBloc(),
+          create: (context) => FoodCubit(),
         ),
         BlocProvider(
-          create: (context) => CategoryBloc(),
+          create: (context) => CategoryCubit(),
         ),
-        BlocProvider<ThemeBloc>(
-          create: (context) => ThemeBloc(),
+        BlocProvider<ThemeCubit>(
+          create: (context) => ThemeCubit(),
         )
       ],
-      child: BlocBuilder<ThemeBloc, ThemeState>(
+      child: BlocBuilder<ThemeCubit, ThemeState>(
         builder: (context, state) {
           return MaterialApp(
             title: 'Japan Eat',

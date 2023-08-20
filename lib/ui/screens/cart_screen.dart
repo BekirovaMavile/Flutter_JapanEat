@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_japan_eat/data/models/food.dart';
-import 'package:flutter_japan_eat/states/food/food_bloc.dart';
+import 'package:flutter_japan_eat/states/food/food_cubit.dart';
 import '../widgets/empty_wrapper.dart';
 import '../../data/app_data.dart';
 import '../../ui_kit/app_color.dart';
@@ -17,10 +17,10 @@ class CartScreen extends StatefulWidget {
 }
 
 class CartScreenState extends State<CartScreen> {
-  double total = 5;
+  double taxes = 5;
   @override
   Widget build(BuildContext context) {
-    final List<Food> cartFood = context.watch<FoodBloc>().getCartList;
+    final List<Food> cartFood = context.watch<FoodCubit>().getCartList;
     return Scaffold(
       appBar: _appBar(context),
       body: EmptyWrapper(
@@ -41,7 +41,7 @@ class CartScreenState extends State<CartScreen> {
   }
 
   Widget _cartListView() {
-    final List<Food> cartFood = context.watch<FoodBloc>().getCartList;
+    final List<Food> cartFood = context.watch<FoodCubit>().getCartList;
     return ListView.separated(
       padding: const EdgeInsets.all(30),
       itemCount: cartFood.length,
@@ -50,7 +50,7 @@ class CartScreenState extends State<CartScreen> {
           direction: DismissDirection.endToStart,
           onDismissed: (direction) {
             if (direction == DismissDirection.endToStart) {
-              context.read<FoodBloc>().add(DeleteFromCartEvent(cartFood[index]));
+              context.read<FoodCubit>().deleteFromCart(cartFood[index]);
             }
           },
           key: UniqueKey(),
@@ -102,12 +102,12 @@ class CartScreenState extends State<CartScreen> {
                     CounterButton(
                       onIncrementTap: () =>
                           context
-                              .read<FoodBloc>()
-                              .add(IncreaseQuantityEvent(cartFood[index])),
+                              .read<FoodCubit>()
+                              .increaseQuantity(cartFood[index]),
                       onDecrementTap: () =>
                           context
-                              .read<FoodBloc>()
-                              .add(DecreaseQuantityEvent(cartFood[index])),
+                              .read<FoodCubit>()
+                              .decreaseQuantity(cartFood[index]),
                       size: const Size(24, 24),
                       padding: 0,
                       label: Text(
@@ -116,7 +116,8 @@ class CartScreenState extends State<CartScreen> {
                       ),
                     ),
                     Text(
-                      "\$${context.read<FoodBloc>().priceFood(cartFood[index])}",
+                      // "\$11",
+                      "\$${context.read<FoodCubit>().priceFood(cartFood[index])}",
                       style: AppTextStyle.h2Style.copyWith(color:
                       LightThemeColor.accent),
                     )
@@ -134,7 +135,7 @@ class CartScreenState extends State<CartScreen> {
   }
 
   Widget _bottomAppBar() {
-    final List<Food> cartFood = context.watch<FoodBloc>().getCartList;
+    final List<Food> cartFood = context.watch<FoodCubit>().getCartList;
     return ClipRRect(
       borderRadius: const BorderRadius.only(
         topLeft: Radius.circular(30),
@@ -163,7 +164,7 @@ class CartScreenState extends State<CartScreen> {
                                 Theme.of(context).textTheme.headlineSmall,
                               ),
                               Text(
-                                "\$${context.read<FoodBloc>().subtotalPrice}",
+                                "\$${context.read<FoodCubit>().subtotalPrice}",
                                 style:
                                 Theme.of(context).textTheme.displayMedium,
                               ),
@@ -183,7 +184,7 @@ class CartScreenState extends State<CartScreen> {
                                 Theme.of(context).textTheme.headlineSmall,
                               ),
                               Text(
-                                "\$${5.00}",
+                                "\$$taxes",
                                 style:
                                 Theme.of(context).textTheme.displayMedium,
                               ),
@@ -208,7 +209,7 @@ class CartScreenState extends State<CartScreen> {
                                 Theme.of(context).textTheme.displayMedium,
                               ),
                               Text(
-                                "\$${total + context.read<FoodBloc>().subtotalPrice}",
+                                "\$${taxes + context.read<FoodCubit>().subtotalPrice}",
                                 style:
                                 AppTextStyle.h2Style.copyWith(color: LightThemeColor.accent,),
                               ),
@@ -225,7 +226,7 @@ class CartScreenState extends State<CartScreen> {
                             child: ElevatedButton(
                               onPressed: () {
                                 for (final food in cartFood) {
-                                  context.read<FoodBloc>().add(DeleteFromCartEvent(food));
+                                  context.read<FoodCubit>().deleteFromCart(food);
                                 }
                               },
                               child: const

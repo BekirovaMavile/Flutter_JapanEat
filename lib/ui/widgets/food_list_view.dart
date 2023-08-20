@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_japan_eat/states/food/food_bloc.dart';
+import 'package:flutter_japan_eat/states/food/food_cubit.dart';
 import '../../ui_kit/app_color.dart';
 import '../../data/models/food.dart';
 import '../../ui_kit/app_text_style.dart';
