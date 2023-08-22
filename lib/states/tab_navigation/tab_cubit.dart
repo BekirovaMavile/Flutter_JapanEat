@@ -8,7 +8,7 @@ class LogicCubit extends Cubit<LogicState> {
 
   void onTabTap(int index) async {
     if (state.currentIndex == index) return;
-    emit(LogicState(index, index)); // Here, update both currentIndex and index
+    emit(LogicState(index, index));
   }
 }
 
