@@ -16,8 +16,5 @@ class FoodState {
     return FoodState(foodList: foodList ?? this.foodList);
   }
 
-  @override
-  String toString() => 'FoodState{foodList: $foodList}';
 }
 
-// class FoodInitial extends FoodState {}
