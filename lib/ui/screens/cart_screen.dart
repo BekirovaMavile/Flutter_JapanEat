@@ -225,9 +225,9 @@ class CartScreenState extends State<CartScreen> {
                             EdgeInsets.symmetric(horizontal: 30),
                             child: ElevatedButton(
                               onPressed: () {
-                                for (final food in cartFood) {
-                                  context.read<FoodCubit>().deleteFromCart(food);
-                                }
+                                // for (final food in cartFood) {
+                                  context.read<FoodCubit>().cleanCart();
+                                // }
                               },
                               child: const
                               Text("Checkout"),

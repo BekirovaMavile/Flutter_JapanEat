@@ -65,14 +65,14 @@ class FoodCubit extends Cubit<FoodState> {
     }).toList();
     emit(FoodState(foodList: foodList));
   }
-  //
-  // // void _cleanCart(CleanCartEvent event, Emitter<FoodState> emit){
-  // //   final List<Food> cartList = state.foodList.map((element) {
-  // //       return event.food.copyWith(cart:false);
-  // //   }).toList();
-  // //   emit(FoodState(foodList: cartList));
-  // // }
-  //
+
+  void cleanCart(){
+    final List<Food> cartList = state.foodList.map((element) {
+        return element.copyWith(cart:false);
+    }).toList();
+    emit(FoodState(foodList: cartList));
+  }
+
   String priceFood(Food food){
     double price = 0;
     price = food.quantity * food.price;
