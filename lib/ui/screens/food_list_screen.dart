@@ -2,14 +2,15 @@ import 'package:badges/badges.dart';
 import 'package:flutter/material.dart' hide Badge;
 import 'package:flutter_japan_eat/data/models/food.dart';
 import 'package:flutter_japan_eat/data/models/food_category.dart';
-import 'package:flutter_japan_eat/states/category/category_cubit.dart';
-import 'package:flutter_japan_eat/states/theme/theme_bloc.dart';
+import 'package:flutter_japan_eat/states/category/category_provider.dart';
+import 'package:flutter_japan_eat/states/theme/theme_provider.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../../ui_kit/_ui_kit.dart';
 import '../../data/app_data.dart';
 import '../extension/app_extension.dart';
 import '../widgets/food_list_view.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:provider/provider.dart';
+
 
 class FoodList extends StatefulWidget {
   const FoodList({super.key});
@@ -21,8 +22,8 @@ class FoodList extends StatefulWidget {
 class FoodListState extends State<FoodList> {
   @override
   Widget build(BuildContext context) {
-    final List<Food> foodList = context.watch<CategoryCubit>().state.foods;
-    final List<Food> filteredFood = context.watch<CategoryCubit>().state.foods;
+    final List<Food> foodList = Provider.of<CategoryProvider>(context).state.foods;
+    final List<Food> filteredFood = Provider.of<CategoryProvider>(context).state.foods;
     return Scaffold(
       appBar: _appBar(context),
       body: Padding(
@@ -80,7 +81,9 @@ class FoodListState extends State<FoodList> {
     return AppBar(
       leading: IconButton(
         icon: const FaIcon(FontAwesomeIcons.dice),
-        onPressed: () => context.read<ThemeCubit>().switchTheme(),
+        onPressed: () {
+          context.read<ThemeProvider>().switchTheme();
+        },
       ),
       title: Row(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -121,43 +124,41 @@ class FoodListState extends State<FoodList> {
     );
   }
 
-Widget _categories() {
-  final List<FoodCategory> categories = context.watch<CategoryCubit>().state.foodCategories;
-  return Padding(
-    padding: const EdgeInsets.only(top: 8.0),
-    child: SizedBox(
-      height: 40,
-      child: ListView.separated(
-          scrollDirection: Axis.horizontal,
-          itemBuilder: (_, index) {
-            final category = categories[index];
-            return GestureDetector(
-              onTap: () => context
-                  .read<CategoryCubit>()
-                  .onCategoryTab(category),
-              child: Container(
-                width: 100,
-                alignment: Alignment.center,
-                decoration: BoxDecoration(
-                  color: category.isSelected
-                      ? LightThemeColor.accent
-                      : Colors.transparent,
-                  borderRadius: const BorderRadius.all(
-                    Radius.circular(15),
+  Widget _categories() {
+    final List<FoodCategory> categories = Provider.of<CategoryProvider>(context).state.foodCategories;
+    return Padding(
+      padding: const EdgeInsets.only(top: 8.0),
+      child: SizedBox(
+        height: 40,
+        child: ListView.separated(
+            scrollDirection: Axis.horizontal,
+            itemBuilder: (_, index) {
+              final category = categories[index];
+              return GestureDetector(
+                onTap: () => context.read<CategoryProvider>().onCategoryTab(category),
+                child: Container(
+                  width: 100,
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                    color: category.isSelected
+                        ? LightThemeColor.accent
+                        : Colors.transparent,
+                    borderRadius: const BorderRadius.all(
+                      Radius.circular(15),
+                    ),
+                  ),
+                  child: Text(
+                    category.type.name.toCapital,
+                    style: Theme.of(context).textTheme.headlineMedium,
                   ),
                 ),
-                child: Text(
-                  category.type.name.toCapital,
-                  style: Theme.of(context).textTheme.headlineMedium,
+              );
+            },
+            separatorBuilder: (_, __) => Container(
+                  width: 15,
                 ),
-              ),
-            );
-          },
-          separatorBuilder: (_, __) => Container(
-                width: 15,
-              ),
-          itemCount: categories.length),
-    ),
-  );
-}
+            itemCount: categories.length),
+      ),
+    );
+  }
 }

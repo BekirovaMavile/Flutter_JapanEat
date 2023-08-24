@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_japan_eat/states/food/food_cubit.dart';
 import '../../ui_kit/app_color.dart';
 import '../../data/models/food.dart';
 import '../../ui_kit/app_text_style.dart';
 import '../screens/food_detail_screen.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 
 class FoodListView extends StatelessWidget {

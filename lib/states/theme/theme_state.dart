@@ -1,4 +1,5 @@
-part of 'theme_bloc.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_japan_eat/ui_kit/app_theme.dart';
 
 class ThemeState {
   final ThemeData theme;

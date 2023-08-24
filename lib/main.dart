@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_japan_eat/states/category/category_cubit.dart';
-import 'package:flutter_japan_eat/states/food/food_cubit.dart';
-import 'package:flutter_japan_eat/states/theme/theme_bloc.dart';
+import 'package:flutter_japan_eat/data/app_data.dart';
+import 'package:flutter_japan_eat/states/category/category_provider.dart';
+import 'package:flutter_japan_eat/states/food/food_provider.dart';
+import 'package:flutter_japan_eat/states/tab_navigation/tab_provider.dart';
+import 'package:flutter_japan_eat/states/theme/theme_provider.dart';
 import 'package:flutter_japan_eat/ui/screens/cart_screen.dart';
 import 'package:flutter_japan_eat/ui/screens/favorite_screen.dart';
 import 'package:flutter_japan_eat/ui/screens/food_detail_screen.dart';
 import 'package:flutter_japan_eat/ui/screens/home_screen.dart';
 import 'package:flutter_japan_eat/ui/screens/profile_screen.dart';
 import 'package:flutter_japan_eat/ui_kit/_ui_kit.dart';
+import 'package:provider/provider.dart';
 import 'package:flutter_japan_eat/ui/screens/food_list_screen.dart';
-
-import 'package:flutter_japan_eat/states/tab_navigation/tab_cubit.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 void main() {
   runApp(const MyApp());
@@ -23,30 +23,28 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider(
-          create: (context) => LogicCubit(),
-        ),
-        BlocProvider(
-          create: (context) => FoodCubit(),
-        ),
-        BlocProvider(
-          create: (context) => CategoryCubit(),
-        ),
-        BlocProvider<ThemeCubit>(
-          create: (context) => ThemeCubit(),
-        )
-      ],
-      child: BlocBuilder<ThemeCubit, ThemeState>(
-        builder: (context, state) {
-          return MaterialApp(
+    return MultiProvider(
+        providers: [
+          ChangeNotifierProvider<TabProvider>(
+            create: (context) => TabProvider(),
+          ),
+          ChangeNotifierProvider<CategoryProvider>(
+            create: (context) => CategoryProvider(),
+          ),
+          ChangeNotifierProvider<FoodProvider>(
+            create: (context) => FoodProvider(),
+          ),
+          ChangeNotifierProvider<ThemeProvider>(
+            create: (context) => ThemeProvider(),
+          ),
+        ],
+        child: Consumer<ThemeProvider>(
+          builder: (_, themeProvider, __) => MaterialApp(
             title: 'Japan Eat',
-            theme: state.theme,
+            theme: themeProvider.state.theme,
             home: const HomeScreen(),
-          );
-        },
-      ),
+          ),
+        ),
     );
   }
 }

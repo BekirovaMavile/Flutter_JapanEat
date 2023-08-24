@@ -1,4 +1,5 @@
-part of 'food_cubit.dart';
+import 'package:flutter/foundation.dart' show immutable;
+import 'package:flutter_japan_eat/data/models/food.dart';
 
 @immutable
 

@@ -1,4 +1,7 @@
-part of 'category_cubit.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart' show immutable;
+import 'package:flutter_japan_eat/data/models/food.dart';
+import 'package:flutter_japan_eat/data/models/food_category.dart';
 
 @immutable
 class CategoryState {
