@@ -9,8 +9,6 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 
-
-
 class FoodDetail extends StatefulWidget {
   const FoodDetail({super.key, required this.food});
 
@@ -70,7 +68,7 @@ class FoodDetailState extends State<FoodDetail> {
   }
 
   Widget _bottomAppBar() {
-    final List<Food> foodList = context.watch<FoodProvider>().state.foodList;
+    // final List<Food> foodList = context.watch<FoodProvider>().state.foodList;
     return ClipRRect(
       borderRadius: const BorderRadius.only(
         topLeft: Radius.circular(30),
